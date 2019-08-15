@@ -17,12 +17,12 @@ Below are some examples of sites running Fikaba. If you are using Fikaba and wan
 ## Features
 * Valid HTML5
 * Fairly advanced admin/moderator/janitor panel
-* [JSON API](https://github.com/knarka/fikaba/blob/master/docs/api.md)
+* [JSON API](https://github.com/mrbn100ful/fikaba/blob/master/docs/api.md)
 * Tripcodes, capcodes
 * Highly configurable
 * Post references
 * Oekaki
-* [...and more](https://github.com/knarka/fikaba/blob/master/docs/features.md)
+* [...and more](https://github.com/mrbn100ful/fikaba/blob/master/docs/features.md)
 
 ## Installation
 This guide assumes you have a webserver with PHP (7.0 at least) already installed. Fikaba has only been tested on Apache, but should work on any server.
@@ -35,10 +35,7 @@ This guide assumes you have a webserver with PHP (7.0 at least) already installe
 6. Pour yourself some puerh and admire your professional adminship
 
 ## Updating
-[See here](https://github.com/knarka/fikaba/blob/master/docs/update.md)
-
-## Contributing
-Contributions are welcome. Github wants me to make a CONTRIBUTING file, but I won't.
+[See here](https://github.com/mrbn100ful/fikaba/blob/master/docs/update.md)
 
 ## License
 See the file LICENSE.
