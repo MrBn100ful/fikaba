@@ -1,12 +1,12 @@
 <?php
-# Fikaba 190401
+# Neonroot 190812
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
-# Based on GazouBBS, Futaba, and Futallaby
+# Based on GazouBBS, Futaba, Futallaby, and Fikaba
 
-const VERSION = '181008';
+const VERSION = '190812';
 
 if (!file_exists('config.php')) {
 	include 'strings/en.php';
@@ -111,7 +111,7 @@ if (!table_exist(MANATABLE)) {
 function humantime($time) {
 	$youbi = array(S_SUN, S_MON, S_TUE, S_WED, S_THU, S_FRI, S_SAT);
 	$yd = $youbi[gmdate("w", $time+9*60*60)];
-	return gmdate("y/m/d",$time+9*60*60)."(".(string)$yd.")".gmdate("H:i",$time+9*60*60);
+	return gmdate("d/m/y",$time+9*60*60)."(".(string)$yd.")".gmdate("H:i",$time+9*60*60);
 }
 
 function updatelog($resno=0) {
@@ -341,6 +341,7 @@ function updatelog($resno=0) {
 			$dat.="<form action=\"".$next/PAGE_DEF.PHP_EXT."\" method=\"get\"><td>";
 			$dat.="<input type=\"submit\" value=\"".S_NEXT."\" />";
 			$dat.="</form></td>";
+			$dat.="<input type=\"button\" value=\"".S_REFRESH."\" onClick=\"location.href=location.href\">";
 		}
 		$dat.="</tr></table><br class=\"allclear\" />";
 		} else { // in res display mode
@@ -398,7 +399,7 @@ function l(e) {var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document) {fo
 	if (OEKAKI_ENABLED) {$dat.='<script src="js/ritare/jscolor/jscolor.min.js"></script><script src="js/ritare/ritare.js"></script><link rel="stylesheet" type="text/css" href="js/ritare/ritare.css" />';}
 	$dat.='</head>
 	<body>
-	<div class="styles"><select>
+	<div class="styles">Style: <select>
 	<option disabled selected value>---</option>';
 	foreach(STYLES as $stylename => $stylefile) {
 		$dat.='<option onClick="changeStyle(\''.$stylename.'\')">'.$stylename.'</option> ';
@@ -407,7 +408,6 @@ function l(e) {var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document) {fo
 	<div class="adminbar">
 	[<a href="'.HOME.'" target="_top">'.S_HOME.'</a>]
 	[<a href="'.PHP_SELF.'?mode=catalog">'.S_CATALOGBUTTON.'</a>]
-	[<a href="'.PHP_SELF.'?mode=admin">'.S_ADMIN.'</a>]
 	</div>
 	<div class="logo">'.$titlepart.'</div><hr class="logohr" /><br /><br />';
 }
@@ -429,15 +429,14 @@ function form(&$dat,$resno,$admin="",$manapost=false) {
 		else { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_POSTING." <a href=\"".PHP_SELF2."\">[".S_RETURN."]</a></td></tr>"; }
 	}
 	if (!FORCED_ANON||$admin)
-		$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" value="';
+		$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" value=""  placeholder="Anonymous';
 		if ($manapost) $dat .= $_SESSION['name'];
 		$dat .= '" size="35" /></td></tr>';
 	if ($admin && $_SESSION['cancap']) {
 		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="checkbox" name="capcode" value="on" checked="checked" size="35" /> ('.$_SESSION['capcode'].')</td></tr>
 		<tr><td class="postblock">'.S_REPLYTO.'</td><td><input type="text" name="resto" size="35" value="0" /></td></tr>';
 	}
-	$dat.='<tr><td class="postblock">'.S_EMAIL.'</td><td><input type="text" name="email" size="35" /></td></tr>
-	<tr><td class="postblock">'.S_SUBJECT.'</td><td><input type="text" name="sub" size="35" />
+	$dat.='<tr><td class="postblock">'.S_SUBJECT.'</td><td><input type="text" name="sub" size="35" />
 	<input type="submit" value="'.S_SUBMIT.'" /></td></tr>
 	<tr><td class="postblock">'.S_COMMENT.'</td><td><textarea id="com" name="com" cols="50" rows="4"></textarea></td></tr>';
 	if (OEKAKI_ENABLED) {$dat.='<tr><td class="postblock">'.S_OEKAKI.'</td><td id="oekakiparent"><span id="painter" style="display:none;"><script>Ritare.start({parentel:"painter",onFinish:function(e) {newfield=document.createElement("input");newfield.type="hidden";newfield.name="oekaki";newfield.id="oekakifile";newfield.value=(Ritare.canvas.toDataURL(\'image/png\')); document.getElementById("postform").appendChild(newfield);alert(\'Oekaki saved!\');},width:370,height:300});</script></span><p id="oekakistarter" onclick="document.getElementById(\'painter\').style=\'display:auto;\';var el = document.getElementById(\'oekakistarter\');el.parentNode.removeChild(el);var el = document.getElementById(\'filerow\');el.parentNode.removeChild(el)">'.S_OEKAKILOAD.'</p></td></tr>';}
@@ -464,7 +463,7 @@ function fakefoot() {
 function foot(&$dat) {
 	$dat.="
 <div class=\"footer\">".S_FOOT."<br />
-Fikaba".S_VERSION.VERSION."<br />
+Neonroot ".S_VERSION." ".VERSION."<br />
 ".FOOTTEXT."
 </div>
 </body></html>\n";
@@ -539,7 +538,7 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		$md5 = md5_of_file($dest);
 		foreach(BADFILE as $value) {
 			if (preg_match("/^$value/",$md5)) {
-				error(S_SAMEPIC,$dest); //Refuse this image
+			error(S_SAMEPIC,$dest); //Refuse this image
 			}
 		}
 		chmod($dest,0666);
@@ -748,9 +747,9 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 		list($timp,$extp,$md5p) = mysqli_fetch_row($result);
 		mysqli_free_result($result);
 		#	  if ($timp&&file_exists($path.$timp.$extp)) { #}
-		if ($timp) {
-			error(S_DUPE,$dest);
-		}
+		//if ($timp) {
+		//	error(S_DUPE,$dest);    disable md5 check
+		//}
 	}
 	}
 
@@ -1316,38 +1315,54 @@ function removeban($ip) {
 function catalog() {
 	$dat = '';
 	head($dat);
+	
+	form($dat, 0);
+	
 	$dat.="<div class=\"passvalid\">".S_CATALOG." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a></div><br />";
 	$dat.="<div class='cattable'>";
 	$i = 0;
 	$result = mysqli_call("select * from ".POSTTABLE." order by root desc");
+	
 	while ($row=mysqli_fetch_row($result)) {
 		list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip)=$row;
 		if ((int)$resto==0) {
 			$dat.="<div class='catthread'>";
 			if ($ext && $ext == ".swf") {
-				$imgsrc = "<img class='catthumb' src=\"file.png\" width=\"200\" height=\"200\" alt=\"".$fsize." B\" /><br />";
+				$imgsrc = "<img class='catthumb' src=\"file.png\" width=\"200\" height=\"200\" alt=\"".$fsize." B\" />";
 				$dat.="<a href='".PHP_SELF."?res=$no'>$imgsrc</a>";
 			} elseif ($ext) {
 				$size = $fsize;//file size displayed in alt text
 				if ($w && $h) {//when there is size...
 					if (@is_file(THUMB_DIR.$tim.'s.jpg')) {
-						$imgsrc = "<img class='catthumb' src=\"".THUMB_DIR.$tim.'s.jpg'."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /><br />";
+						$imgsrc = "<img class='catthumb' src=\"".THUMB_DIR.$tim.'s.jpg'."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" />";
 					} else {
-						$imgsrc = "<img class='catthumb' src=\"".IMG_DIR.$tim.$ext."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" /><br />";
+						$imgsrc = "<img class='catthumb' src=\"".IMG_DIR.$tim.$ext."\" width=\"$w\" height=\"$h\" alt=\"".$size." B\" />";
 					}
 				} else {
-					$imgsrc = "<img class='catthumb' src=\"$src\" alt=\"".$size." B\" /><br />";
+					$imgsrc = "<img class='catthumb' src=\"$src\" alt=\"".$size." B\" />";
 				}
 				$dat .= "<a href='".PHP_SELF."?res=$no'>$imgsrc</a>";
 			}
 			if (strlen($com) > 55) {
 				$com = substr($com, 0, 54)."...";
 			}
-			$dat.="<a class='cata' href='".PHP_SELF."?res=$no'><span class='cattitle filetitle'>$sub</span><br /><span class='catcont'>$com</span></a></div>";
+			
+			$callreply = mysqli_call("SELECT COUNT(1) FROM ".POSTTABLE." WHERE resto = ".$no."");
+			
+			$nbreply =mysqli_fetch_row($callreply);
+			
+			list($reply)=$nbreply;
+			
+			$dat.="<a class='cata' href='".PHP_SELF."?res=$no'><span class='cattitle filetitle'>$sub</span> <br> <span class='catresponse'>R: $reply</span> <br /><span class='catcont'>$com</span> </a></div>";
+			
+			mysqli_free_result($callreply);
+			
 			$i++;
+			
 		}
 	}
 	mysqli_free_result($result);
+	
 	$dat.="</div>";
 	foot($dat);
 	echo($dat);
