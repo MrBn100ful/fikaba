@@ -1,6 +1,7 @@
 # Neonroot
 
-This is a version off fikaba modified for the french imageboard https://boards.neonroot.net/
+This is a version off fikaba modified for the french imageboard https://boards.neonroot.net/ .
+
 The only supported language is french.
 
 # Fikaba
