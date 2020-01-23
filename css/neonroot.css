@@ -1,8 +1,9 @@
 body {
-	font-size: 12pt;
-	background: #191919;
+	font-size: 100%;
+	background: #1d1f21;
 	color: #ffffff;
-	 
+	font-family: 'Roboto', sans-serif;
+    margin: 5px;
 
 }
 a {
@@ -10,29 +11,29 @@ a {
 	color: #ffc600;
 	text-decoration: underline;
 	font-family: serif;
+	cursor: pointer;
 }
 a:visited {
 	background: inherit;
 	color: #ffc600;
 	text-decoration: underline;
-	font-family: serif;
 }
 input[type=button], input[type=submit], input[type=reset] {
-  background-color: #4c4c4c;
+  background-color: #282a2e;
   border: hidden;
   color: #ffc600;
-  padding: 5px 32px;
+  padding: 4px 4px;
   text-decoration: none;
-  margin: 2px 18px;
+font-size: 100%;
+  margin: 1px 1px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 2px;
 
 }
 a:hover, .admddel, .admbban, .admppost, .admaacc {
 	color: #DD0000!important;
 	background: inherit;
 	text-decoration: underline;
-	font-family: serif;
 }
 .reflink, .reflink:visited {
 	color: #ffc600;
@@ -42,6 +43,30 @@ a:hover, .admddel, .admbban, .admppost, .admaacc {
 	color: #ffc600;
 	text-decoration: none;
 }
+.showboards, .regle{
+	display: inline-block;
+	float: none;
+	border-color: #777777;
+	border-style: solid;
+    border-width: 4px;
+	text-align: left;
+	font-size: 28px;
+	padding-left: 30px;
+	padding-right:30px;
+	padding-bottom:30px;
+	vertical-align: top;
+	border-radius: 8px;
+}
+
+
+.boardstitle{
+ background-color:#777777;
+}
+.boardslistesfw{
+background-color:#e6c23a;
+}
+
+
 img {
 	margin: 4px 10px 10px 10px;
 	border: 0;
@@ -83,18 +108,18 @@ td {
 }
 .rules {
 	font-size: 10px;
-	font-family: sans-serif;
+
 }
 .postblocktitle {
-	background: #4c4c4c;
+	background: #282a2e;
 	text-align: center;
 	color: #ffffff;
 	font-weight: 800;
-	border-radius: 5px;
+	border-bottom: 2px solid #cc1105
 	padding: 20px; 
 }
 .postblock {
-	background: #4c4c4c;
+	background: #282a2e;
 	color: #ffffff;
 	font-weight: 800;
 	border-radius: 5px;
@@ -103,14 +128,14 @@ td {
 .footer {
 	text-align: center;
 	font-size: 12px;
-	font-family: serif;
 	margin-top: 45px;
 }
 .passvalid {
-	background: #4c4c4c;
+	background: #282a2e;
 	text-align: center;
 	width: 100%;
 	color: #ffffff;
+	cursor: pointer;
 }
 .dellist {
 	background: inherit;
@@ -124,7 +149,7 @@ td {
 .managehead {
 	background: #0F8FE1;
 	color: #800000;
-	font-family: sans-serif;
+
 	font-size: 14px;
 	padding: 0px;
 }
@@ -136,13 +161,12 @@ td {
 }
 .row1 {
 	background: #9AD2F6;
-	font-family: sans-serif;
 	font-size: 12px;
 	color: #800000;
 }
 .row2 {
 	background: #FFFFFF;
-	font-family: sans-serif;
+
 	font-size: 12px;
 	color: #800000;
 }
@@ -152,7 +176,7 @@ td {
 }
 .filesize {
 	font-size: 16px;
-	font-family: serif;
+
 	text-decoration: none;
 	padding-right: 10px;
 	margin-left: 10px;
@@ -160,36 +184,34 @@ td {
 .filetitle {
 	background: inherit;
 	font-size: 18px;
-	font-family: serif !important;
 	color: #ffc600 !important;
 	font-weight: 800;
 }
 .postername {
 	background: inherit;
 	font-size: 16px;
-	font-family: serif;
+
 	color: #10ec7c;
 	font-weight: 800;
 }
 .oldpost {
 	background: inherit;
 	font-size: 18px;
-	font-family: serif;
+
 	color: #CC1105;
 	font-weight: 800;
 }
 .omittedposts {
 	background: inherit;
 	font-size: 18px;
-	font-family: serif;
+
 	color: #cacaca;
 	font-weight: 800;
 	margin-left: 30px;
 }
 .reply {
-	background: #4c4c4c;
-	color: #ffffff;
-	font-family: serif;
+	background: #282a2e;
+
 	min-width: 500px;
 	border-radius: 5px;
 	padding: 5px; 
@@ -202,7 +224,7 @@ td {
 .replytitle {
 	background: inherit;
 	font-size: 18px;
-	font-family: serif;
+
 	color: #CC1105;
 	font-weight: 800;
 }
@@ -211,14 +233,14 @@ td {
 .commentpostername {
 	background: inherit;
 	font-size: 16px;
-	font-family: serif;
+
 	color: #10ec7c;
 	font-weight: 800;
 }
 .thumbnailmsg {
 	background: inherit;
 	font-size: 9px;
-	font-family: sans-serif;
+
 	color: #800000;
 	padding-right: 5px;
 }
@@ -252,7 +274,7 @@ td {
 	max-height: 220px;
 	width: 180px;
 	height: 250px;
-	border-color: #4c4c4c;
+	border-color: #282a2e;
 	border-style: solid;
 	border-width: 2px;
 	text-align: center;
@@ -293,10 +315,34 @@ td {
 	margin-left: auto;
 	margin-right: auto;
 }
-form table {
-}
 #errormsg {
 	color: red;
 	text-align: center;
 	font-size: 20pt;
+}
+
+@media (pointer:none), (pointer:coarse) {
+
+	html{
+font-size:30px;
+}
+	
+.styles,.adminbar{
+	font-size: 200%;
+	float: left;
+}
+.footer,blockquote{
+	font-size:20px;
+}
+	
+.showboards, .regle{
+	width: 90%;
+	font-size: 40px;
+}
+.logo {
+font-size: 50px;
+padding-top:15px;
+}
+
+	
 }

@@ -3,7 +3,7 @@
 const S_NOAPI = 'API is currently disabled';
 const S_NOTCONFIGURED = 'Imageboard must be configured before usage';					//If config.php does not exist
 const S_LOCKDOWN = 'Board is currently disabled. Please check back later';				//Lockdown
-const S_HOME = 'Accueil'; // Transférer à la page d'accueil
+const S_HOME = 'Dernier poste'; // Transférer à la page d'accueil
 const S_ADMIN = 'Admin'; // Transférer au panneau de gestion
 const S_RETURN = 'Retour'; // retourne au tableau d'image
 const S_POSTING = 'Mode de publication: Réponse'; // Imprime le message dans la barre rouge en haut de l'écran de réponse
@@ -29,7 +29,8 @@ const S_RULES_SWF = '<ul> <li>Vous pouvez poster tout ce que vous voulez tant qu
 <li> Les types de fichiers pris en charge sont: GIF, JPG, PNG, SWF </ li>
 <li> La taille de fichier maximale autorisée est '.MAX_KB.' KB. </ Li>
 <li> Les images supérieures à '.MAX_W.'x'.MAX_H.' les pixels seront miniatures. </ li> </ ul> '; // Imprime les règles sous la section de publication
-const S_RULES_WEBM = '<ul> <li>Vous pouvez poster tout ce que vous voulez tant que c est légal en France.</ li>
+const S_RULES_WEBM = '<ul><li> Pas de contenue illégale en France ( Gore, Racisme, PedoPorn). </ li>
+<li> Les spams/pubs seront supprimers. </ li>
 <li> Les formats de fichier supportés sont JPG, PNG, GIF et WEBM. </ li>
 <li> La taille de fichier maximal autorisé est '.MAX_KB.' KB. </ Li>
 <li> Les images supérieures à '.MAX_W.'x'.MAX_H.' seront réduites. </ li> </ ul> '; // Imprime les règles sous la section de publication
@@ -51,7 +52,7 @@ const S_DELETE = 'Supprimer'; // Définit le nom du bouton de suppression
 const S_PREV = 'Précédent'; // Définit le bouton précédent
 const S_NEXT = 'Suivant'; // Définit le bouton suivant
 const S_REFRESH = 'Rafraîchir'; // Définit le bouton rafraîchir
-const S_FOOT = '- GazouBBS + <a href="http://www.2chan.net/" target="_blank"> futaba </a> + <a href = "http://www.1chan.net/ futallaby / "target =" _ blank "> futallaby </a> + <a href="https://github.com/knarka/fikaba" target="_blank"> fikaba </a> + <a href = ""target =" _ blank "> Neonroot </a> - '; // Imprime le pied de page (laisse ces crédits)
+const S_FOOT = '- GazouBBS + <a href="http://www.2chan.net/" target="_blank"> futaba </a> + <a href = "http://www.1chan.net/ futallaby / "target =" _ blank "> futallaby </a> + <a href="https://github.com/knarka/fikaba" target="_blank"> fikaba </a> + <a href ="https://github.com/MrBn100ful/fikaba" target =" _ blank "> Neonroot </a> - '; // Imprime le pied de page (laisse ces crédits)
 const S_UPFAIL = 'Erreur: le téléchargement a échoué.'; // Retourne une erreur en cas d'échec du téléchargement (motif: inconnu?)
 const S_NOREC = 'Erreur: enregistrement introuvable.'; // Retourne une erreur lorsque l'enregistrement est introuvable
 const S_SAMEPIC = 'Erreur: somme de contrôle md5 en double détectée.'; // Retourne une erreur quand une dupe de somme de contrôle md5 est détectée
@@ -138,3 +139,4 @@ const S_ACCBAN = 'Peut interdire les utilisateurs? ';
 const S_ACCCAP = 'Peut-on poster avec capcode? ';
 const S_ACCACC = 'Peut créer de nouveaux comptes? ';
 const S_VERSION = 'version';
+const S_NAMEVERSION= 'Beta 1.4';

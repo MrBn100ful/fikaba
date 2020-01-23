@@ -1,12 +1,12 @@
 <?php
-# Neonroot 190812
+# Neonroot 2001011
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, Futallaby, and Fikaba
 
-const VERSION = '190812';
+const VERSION = '2001011';
 
 if (!file_exists('config.php')) {
 	include 'strings/en.php';
@@ -110,8 +110,8 @@ if (!table_exist(MANATABLE)) {
 
 function humantime($time) {
 	$youbi = array(S_SUN, S_MON, S_TUE, S_WED, S_THU, S_FRI, S_SAT);
-	$yd = $youbi[gmdate("w", $time+9*60*60)];
-	return gmdate("d/m/y",$time+9*60*60)."(".(string)$yd.")".gmdate("H:i",$time+9*60*60);
+	$yd = $youbi[gmdate("w", $time+2*60*60)];
+	return gmdate("d/m/y",$time+2*60*60)."(".(string)$yd.")".gmdate("H:i",$time+2*60*60);
 }
 
 function updatelog($resno=0) {
@@ -167,7 +167,21 @@ function updatelog($resno=0) {
 		if (!$resno) $st = $page;
 		else $st = 0;
 		$dat .= '<form action="'.PHP_SELF.'" method="post">';
+		
+		if ($resno==0){
+					
+			
+		$dat .= '<div class="passvalid"> [<a href="imgboard.php?mode=catalog">'.S_CATALOGBUTTON.'</a>]</div> <br>';
 
+	
+	
+		}else{
+		
+		$dat .= '<div class="passvalid">[<a href='.PHP_SELF2.'>'.S_RETURNS.'</a>] [<a href="imgboard.php?mode=catalog">'.S_CATALOGBUTTON.'</a>]</div> <br>';
+
+
+		}
+		
 		$p = 0;
 		for ($i = $st; $i < $st+PAGE_DEF; $i++) {
 			list($no,$now,$name,$email,$sub,$com,$host,$pwd,$ext,$w,$h,$tim,$time,$md5,$fname,$fsize,$root,$resto,$ip,$id)=mysqli_fetch_row($treeline);
@@ -341,11 +355,13 @@ function updatelog($resno=0) {
 			$dat.="<form action=\"".$next/PAGE_DEF.PHP_EXT."\" method=\"get\"><td>";
 			$dat.="<input type=\"submit\" value=\"".S_NEXT."\" />";
 			$dat.="</form></td>";
-			$dat.="<input type=\"button\" value=\"".S_REFRESH."\" onClick=\"location.href=location.href\">";
+			$dat.="[<a onClick=\"location.href=location.href\" >".S_REFRESH."</a>]";
 		}
 		$dat.="</tr></table><br class=\"allclear\" />";
 		} else { // in res display mode
+		 
 			$dat.="<table></table><br class=\"allclear\" />";
+			   $dat.="[<a onClick=\"location.href=location.href\" >".S_REFRESH."</a>]";
 		}
 		foot($dat);
 		if (ECHOALL) {echo $dat;break;}
@@ -384,38 +400,60 @@ function head(&$dat) {
 		$titlepart .= TITLE;
 	}
 	$dat.='<!doctype html>
-<html lang="'.LANGUAGE.'"><head>
+<html lang="'.LANGUAGE.'"> 
+<link rel="stylesheet" type="text/css" href="https://boards.neonroot.net/css/neonroot.css">
+<script src="js/jquery.js"></script>
+<script src="js/style.js"></script><head>
+<script type="text/javascript">
+    var value = readCookie("theme");
+	if (value == null) {
+        changeCSS("https://boards.neonroot.net/css/neonroot.css", 0);
+        }else {
+	changeCSS(value, 0);
+        }
+</script>
+
 <meta http-equiv="content-type"  content="text/html;charset=utf-8" />
 <!-- meta HTTP-EQUIV="pragma" CONTENT="no-cache" -->
-<script src="js/style.js"></script>';
-	foreach(STYLES as $stylename => $stylefile) {
-		$dat.='<link rel="alternate stylesheet" type="text/css" href="'.$stylefile.'" title="'.$stylename.'" />';
-	}
-	$dat.='<script>getUserFav("'.CSSDEFAULT.'");</script>
-<title>'.TITLE.'</title>
+<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+
+
+';
+	
+	$dat.='<title>'.TITLE.'</title>
 <script><!--
 function l(e) {var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document) {for(i=0;i<forms.length;i++) {if (forms[i].pwd)with(forms[i]) {if (!pwd.value)pwd.value=P;}if (forms[i].name)with(forms[i]) {if (!name.value)name.value=N;}}}};function getCookie(key, tmp1, tmp2, xx1, xx2, xx3) {tmp1 = " " + document.cookie + ";";xx1 = xx2 = 0;len = tmp1.length;	while (xx1 < len) {xx2 = tmp1.indexOf(";", xx1);tmp2 = tmp1.substring(xx1 + 1, xx2);xx3 = tmp2.indexOf("=");if (tmp2.substring(0, xx3) == key) {return(unescape(tmp2.substring(xx3 + 1, xx2 - xx1 - 1)));}xx1 = xx2 + 1;}return("");}
 //--></script><script>function addref(postid) {document.getElementById("com").value += ">>" + postid + "\n";}</script>';
 	if (OEKAKI_ENABLED) {$dat.='<script src="js/ritare/jscolor/jscolor.min.js"></script><script src="js/ritare/ritare.js"></script><link rel="stylesheet" type="text/css" href="js/ritare/ritare.css" />';}
 	$dat.='</head>
 	<body>
-	<div class="styles">Style: <select>
-	<option disabled selected value>---</option>';
-	foreach(STYLES as $stylename => $stylefile) {
-		$dat.='<option onClick="changeStyle(\''.$stylename.'\')">'.$stylename.'</option> ';
-	}
-	$dat.='</select></div>
+	<div class="styles">
+	
+	[<a href="#" onclick="changeCSS(\'https://boards.neonroot.net/css/neonroot.css\', 0);document.cookie=\'theme=https://boards.neonroot.net/css/neonroot.css\';">Style Nuit</a>] 
+    
+	[<a href="#" onclick="changeCSS(\'https://boards.neonroot.net/css/neonroot_claire.css\', 0);document.cookie=\'theme=https://boards.neonroot.net/css/neonroot_claire.css\';">Style Océan</a>]	
+	
+	';
+	$dat.='</div>
 	<div class="adminbar">
-	[<a href="'.HOME.'" target="_top">'.S_HOME.'</a>]
-	[<a href="'.PHP_SELF.'?mode=catalog">'.S_CATALOGBUTTON.'</a>]
+	[<a href="https://boards.neonroot.net" target="_top">Accueil</a>]
+	[<a href="https://boards.neonroot.net/ge/" target="_top">/ge/</a>]
+	[<a href="https://boards.neonroot.net/an/" target="_top">/an/</a>]
+	[<a href="https://boards.neonroot.net/po/" target="_top">/po/</a>]
+	[<a href="https://boards.neonroot.net/te/" target="_top">/te/</a>]
+	[<a href="https://boards.neonroot.net/je/" target="_top">/je/</a>]
+	[<a href="https://boards.neonroot.net/di/" target="_top">/di/</a>]
+	[<a href="https://boards.neonroot.net/ar/" target="_top">/ar/</a>]
+	[<a href="https://boards.neonroot.net/cu/" target="_top">/cu/</a>]
 	</div>
-	<div class="logo">'.$titlepart.'</div><hr class="logohr" /><br /><br />';
+	<br>
+	<div class="logo"><br>'.$titlepart.' </div> <hr class="logohr" /><br /><br /> <br>';
 }
 /* Contribution form */
 function form(&$dat,$resno,$admin="",$manapost=false) {
 	$maxbyte = MAX_KB * 1024;
 	$no=$resno;
-	if ($admin) $msg = "<em>".S_NOTAGS."</em>";
+	if ($admin) $msg = "<em>".S_NOTAGS."  </em>";
 	else $msg = '';
 
 	$dat.=$msg.'<div class="centered"><div class="postarea">
@@ -429,9 +467,9 @@ function form(&$dat,$resno,$admin="",$manapost=false) {
 		else { $dat.='<tr><td class="postblocktitle" colspan=2>'.S_POSTING." <a href=\"".PHP_SELF2."\">[".S_RETURN."]</a></td></tr>"; }
 	}
 	if (!FORCED_ANON||$admin)
-		$dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" value=""  placeholder="Anonymous';
+		// $dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" value=""  placeholder="Anonymous';
 		if ($manapost) $dat .= $_SESSION['name'];
-		$dat .= '" size="35" /></td></tr>';
+		// $dat .= '" size="35" /></td></tr>';
 	if ($admin && $_SESSION['cancap']) {
 		$dat.='<tr><td class="postblock">'.S_CAPCODE.'</td><td><input type="checkbox" name="capcode" value="on" checked="checked" size="35" /> ('.$_SESSION['capcode'].')</td></tr>
 		<tr><td class="postblock">'.S_REPLYTO.'</td><td><input type="text" name="resto" size="35" value="0" /></td></tr>';
@@ -450,7 +488,7 @@ function form(&$dat,$resno,$admin="",$manapost=false) {
 	elseif (SWF_ENABLED) $dat .= S_RULES_SWF;
 	elseif (WEBM_ENABLED) $dat .= S_RULES_WEBM;
 	else $dat .= S_RULES;
-	$dat.='</div></td></tr></table></form></div></div><hr />';
+	$dat.='</div></td></tr></table></form></div></div>[<a onClick="location.href=location.href" >'.S_REFRESH.'</a>] <br><hr />   ';
 }
 
 function fakefoot() {
@@ -462,9 +500,9 @@ function fakefoot() {
 /* Footer */
 function foot(&$dat) {
 	$dat.="
-<div class=\"footer\">".S_FOOT."<br />
+<div class=\"footer\"> <br>".S_FOOT."<br />
 Neonroot ".S_VERSION." ".VERSION."<br />
-".FOOTTEXT."
+".S_NAMEVERSION."
 </div>
 </body></html>\n";
 }
@@ -477,6 +515,7 @@ function error($mes,$dest='') { /* Basically a fancy die() */
 	echo "<br /><br /><hr size=1><br /><br />
 		<p id='errormsg'>$mes<br /><br /><a href=".PHP_SELF2.">".S_RETURN."</a></b></p>
 		<br /><br /><hr size=1>";
+	foot($dat);
 	die("</body></html>\n");
 }
 
@@ -662,9 +701,9 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	$c_pass = $pwd;
 	$pass = ($pwd) ? substr(md5($pwd),2,8) : "*";
 	$youbi = array(S_SUN, S_MON, S_TUE, S_WED, S_THU, S_FRI, S_SAT);
-	$yd = $youbi[gmdate("w", $time+9*60*60)] ;
-	$now = gmdate("y/m/d",$time+9*60*60)."(".(string)$yd.")".gmdate("H:i",$time+9*60*60);
-	$posterid = substr(crypt(md5($_SERVER["REMOTE_ADDR"].'id'.gmdate("Ymd", $time+9*60*60)),'id'),-8);
+	$yd = $youbi[gmdate("w", $time+2*60*60)] ;
+	$now = gmdate("y/m/d",$time+2*60*60)."(".(string)$yd.")".gmdate("H:i",$time+2*60*60);
+	$posterid = substr(crypt(md5($_SERVER["REMOTE_ADDR"].'id'.gmdate("Ymd", $time+2*60*60)),'id'),-8);
 	// Text plastic surgery (rorororor)
 	$email = CleanStr($email); $email = preg_replace("/[\r\n]/", "", $email);
 	$sub = CleanStr($sub); $sub = preg_replace("/[\r\n]/", "", $sub);
@@ -821,7 +860,6 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	} else {
 		echo "<html><head><meta http-equiv=\"refresh\" content=\"1;URL=".PHP_SELF."?res=$resto\" /></head>";
 	}
-	echo "<body>$mes ".S_SCRCHANGE."</body></html>\n";
 }
 
 //thumbnails
@@ -1007,6 +1045,14 @@ function adminhead() {
 	echo("[<a class='admp$admin' href='".PHP_SELF."?mode=admin&admin=post'>".S_MANAPOST."</a>] ");
 	echo("[<a class='adma$admin' href='".PHP_SELF."?mode=admin&admin=acc'>".S_MANAACCS."</a>] ");
 	echo("[<a href='".PHP_SELF."?mode=admin&admin=logout'>".S_LOGOUT."</a>]</div>");
+	echo("<div class='manabuttons'>[<a href='https://boards.neonroot.net/ge/imgboard.php?mode=admin' target='_top'>/ge/</a>]
+	[<a href='https://boards.neonroot.net/an/imgboard.php?mode=admin' target='_top'>/an/</a>]
+	[<a href='https://boards.neonroot.net/po/imgboard.php?mode=admin' target='_top'>/po/</a>]
+	[<a href='https://boards.neonroot.net/te/imgboard.php?mode=admin' target='_top'>/te/</a>]
+	[<a href='https://boards.neonroot.net/je/imgboard.php?mode=admin' target='_top'>/je/</a>]
+	[<a href='https://boards.neonroot.net/di/imgboard.php?mode=admin' target='_top'>/di/</a>]
+	[<a href='https://boards.neonroot.net/ar/imgboard.php?mode=admin' target='_top'>/ar/</a>]
+	[<a href='https://boards.neonroot.net/cu/imgboard.php?mode=admin' target='_top'>/cu/</a>]</div>");
 }
 
 /*password validation */
@@ -1318,7 +1364,7 @@ function catalog() {
 	
 	form($dat, 0);
 	
-	$dat.="<div class=\"passvalid\">".S_CATALOG." <a href=\"".PHP_SELF2."\">[".S_RETURNS."]</a></div><br />";
+	$dat.="<div class=\"passvalid\"> [<a href=\"".PHP_SELF2."\">".S_RETURNS."</a>] </div><br />";
 	$dat.="<div class='cattable'>";
 	$i = 0;
 	$result = mysqli_call("select * from ".POSTTABLE." order by root desc");
@@ -1364,6 +1410,7 @@ function catalog() {
 	mysqli_free_result($result);
 	
 	$dat.="</div>";
+	$dat.="<hr> [<a onClick=\"location.href=location.href\" >".S_REFRESH."</a>]";
 	foot($dat);
 	echo($dat);
 }
