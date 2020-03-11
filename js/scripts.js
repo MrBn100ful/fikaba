@@ -26,3 +26,8 @@ function getCookie(name) {
 	var parts = value.split("; " + name + "=");
 	if (parts.length == 2) return parts.pop().split(";").shift();
 }
+
+
+function mobile(x) {
+  document.getElementById("mobile-cacher").classList.toggle("show");
+};

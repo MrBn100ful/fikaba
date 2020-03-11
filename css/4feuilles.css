@@ -1,0 +1,447 @@
+ body {
+    font-size: 14px;
+    background: #1d1f21;
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    margin: 5px;
+
+}
+
+a {
+    background: inherit;
+    color: #68F96A;
+    text-decoration: underline;
+    font-family: serif;
+    cursor: pointer;
+}
+
+a:visited {
+    background: inherit;
+    color: #68F96A;
+    text-decoration: underline;
+}
+
+input[type=button],
+input[type=submit],
+input[type=reset] {
+    background-color: #282a2e;
+    border: hidden;
+    color: #68F96A;
+    padding: 4px 4px;
+    text-decoration: none;
+    margin: 1px 1px;
+    cursor: pointer;
+    border-radius: 2px;
+
+}
+
+
+#mobile-cacher {
+    display: none;
+}
+.menu-normal{
+
+	background-color: #282a2e;
+	padding-bottom: 23px;
+	
+}
+
+a:hover,
+.admddel,
+.admbban,
+.admppost,
+.admaacc {
+    color: #6ac6fc !important;
+    background: inherit;
+    text-decoration: underline;
+}
+
+.reflink,
+.reflink:visited {
+    color: #68F96A;
+    text-decoration: none;
+}
+
+.reflink:hover {
+    color: #68F96A;
+    text-decoration: none;
+}
+
+.showboards{
+    display: inline-block;
+    float: none;
+    border-color: #777777;
+    border-style: solid;
+    border-width: 4px;
+    text-align: left;
+    font-size: 28px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+    vertical-align: top;
+    border-radius: 8px;
+}
+
+.menu-mobile {
+    display: none;
+}
+
+.boardstitle {
+    background-color: #777777;
+}
+
+.boardslistesfw {
+    background-color: #68F96A;
+	color: black;
+	padding-left: 15px;
+}
+
+
+img {
+    margin: 4px 10px 10px 10px;
+    border: 0;
+    float: left;
+    clear: none;
+}
+
+td {
+    text-align: left;
+}
+
+.adminbar {
+    text-align: right;
+    background: inherit;
+    /*clear: both;*/
+    float: right;
+	margin-right: 8px;
+}
+
+.styles {
+    float: left;
+	margin-left: 8px;
+}
+
+.logo {
+    clear: both;
+    text-align: center;
+    background: inherit;
+    font-size: 24pt;
+    color: #68F96A;
+    width: 100%;
+}
+
+.logo img {
+    margin: 0 auto;
+    clear: both;
+    float: none;
+}
+
+.theader {
+    background: #0010E0;
+    color: #FFFFFF;
+    width: 100%;
+}
+
+.postarea {
+    background: inherit;
+}
+
+.rules {
+    font-size: 10px;
+
+}
+
+.postblocktitle {
+    background: #282a2e;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 800;
+    border-bottom: 2px solid #cc1105 padding: 20px;
+}
+
+.postblock {
+    background: #282a2e;
+    color: #ffffff;
+    font-weight: 800;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.footer {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 45px;
+}
+
+.passvalid {
+    background: #282a2e;
+    text-align: center;
+    width: 100%;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.dellist {
+    background: inherit;
+    text-align: center;
+}
+
+.delbuttons {
+    background: inherit;
+    text-align: center;
+    padding-bottom: 4px;
+}
+
+.managehead {
+    background: #0F8FE1;
+    color: #800000;
+    padding: 0px;
+}
+
+.postlists {
+    background: #FFFFFF;
+    width: 100%;
+    padding: 0px;
+    color: #800000;
+}
+
+.row1 {
+    background: #9AD2F6;
+    color: #800000;
+}
+
+.row2 {
+    background: #FFFFFF;
+    color: #800000;
+}
+
+.unkfunc {
+    background: inert;
+    color: #6ef9ff;
+}
+
+.filesize {
+    text-decoration: none;
+    padding-right: 10px;
+    margin-left: 10px;
+}
+
+.filetitle {
+    background: inherit;
+    color: #68F96A !important;
+    font-weight: 800;
+}
+
+.postername {
+    background: inherit;
+    color: #10ec7c;
+    font-weight: 800;
+}
+
+.oldpost {
+    background: inherit;
+    color: #CC1105;
+    font-weight: 800;
+}
+
+.omittedposts {
+    background: inherit;
+    font-size: 16px;
+    color: #cacaca;
+    font-weight: 800;
+    margin-left: 30px;
+}
+
+.reply {
+    background: #282a2e;
+    min-width: 700px;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.doubledash {
+    vertical-align: top;
+    clear: both;
+    float: left;
+}
+
+.replytitle {
+    background: inherit;
+    color: #CC1105;
+    font-weight: 800;
+}
+
+.commentfile {}
+
+.commentpostername {
+    background: inherit;
+    color: #10ec7c;
+    font-weight: 800;
+}
+
+.thumbnailmsg {
+    background: inherit;
+    color: #800000;
+    padding-right: 5px;
+}
+
+.leftclear {
+    clear: left;
+}
+
+.allclear {
+    clear: all;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+.centered {
+    text-align: center;
+}
+
+.boardlist {
+    text-align: center;
+	font-size:26px;
+}
+
+.lefted {
+    text-align: left;
+}
+
+.righted {
+    text-align: right;
+    float: right;
+}
+
+.manabuttons {
+    text-align: center;
+    padding-top: 6px;
+}
+
+.catthread {
+    display: inline-block;
+    float: none;
+    max-width: 170px;
+    max-height: 220px;
+    width: 180px;
+    height: 250px;
+    border-color: #282a2e;
+    border-style: solid;
+    border-width: 2px;
+    text-align: center;
+    padding-top: 18px;
+    vertical-align: top;
+    margin: 3px;
+    border-radius: 5px;
+
+}
+
+.cata {
+    text-decoration: none !important;
+    color: #ffffff !important;
+}
+
+.catthumb {
+    max-width: 160px;
+    max-height: 160px;
+    width: auto;
+    height: auto;
+}
+
+.cattitle,
+.cattitle:hover {
+    text-decoration: none;
+}
+
+.catcont {
+    word-wrap: break-word;
+}
+
+.catthread img {
+    max-height: 40%;
+    max-width: 99%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    float: none !important;
+}
+
+.cattable {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#errormsg {
+    color: red;
+    text-align: center;
+}
+
+@media (pointer:none),
+(pointer:coarse) {
+
+    html {
+        font-size: 30px;
+	}
+ .catthread {
+    max-width: 570px;
+    max-height: 420px;
+    width: 380px;
+    height: 350px;
+    font-size: 25px;
+
+}
+.rules{
+	font-size:20px;
+	}
+	.filesize{
+	font-size:15px;
+	}
+	.filetitle{
+	font-size: 25px;
+	}
+
+
+    .styles,
+    .adminbar {
+        display: none;
+    }
+
+    .footer,
+    blockquote {
+        font-size: 25px;
+    }
+
+	.reply {
+    min-width: 500px;
+}
+    .showboards,
+    .regle {
+        width: 90%;
+        font-size: 40px;
+    }
+
+    .menu-mobile {
+        display: block;
+        font-size: 40px;
+        text-align: center;
+        font-size: 40px;
+    }
+
+    .logo {
+        font-size: 65px;
+        padding-top: 15px;
+    }
+
+    .show {
+        display: block !important;
+    }
+
+    #mobile-cacher {
+        list-style-type: none;
+    }
+
+
+}

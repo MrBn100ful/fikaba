@@ -1,20 +1,17 @@
 <?php
-# Neonroot 2001011
+# 4feuilles 200203
 #
 # For setup instructions and latest version, please visit:
 # https://github.com/knarka/fikaba
 #
 # Based on GazouBBS, Futaba, Futallaby, and Fikaba
 
-const VERSION = '2001011';
+const VERSION = '200203';
 
-if (!file_exists('config.php')) {
-	include 'strings/en.php';
-	die(S_NOTCONFIGURED);
-}
 
 include 'config.php';
 include 'strings/'.LANGUAGE.'.php'; // String resource file
+
 
 if (LOCKDOWN) {
 	// if not trying to do something other than managing, die
@@ -110,8 +107,8 @@ if (!table_exist(MANATABLE)) {
 
 function humantime($time) {
 	$youbi = array(S_SUN, S_MON, S_TUE, S_WED, S_THU, S_FRI, S_SAT);
-	$yd = $youbi[gmdate("w", $time+2*60*60)];
-	return gmdate("d/m/y",$time+2*60*60)."(".(string)$yd.")".gmdate("H:i",$time+2*60*60);
+	$yd = $youbi[gmdate("w", $time+TIMEZONE*60*60)];
+	return gmdate("d/m/y",$time+TIMEZONE*60*60)."(".(string)$yd.")".gmdate("H:i",$time+TIMEZONE*60*60);
 }
 
 function updatelog($resno=0) {
@@ -401,13 +398,13 @@ function head(&$dat) {
 	}
 	$dat.='<!doctype html>
 <html lang="'.LANGUAGE.'"> 
-<link rel="stylesheet" type="text/css" href="https://boards.neonroot.net/css/neonroot.css">
-<script src="js/jquery.js"></script>
-<script src="js/style.js"></script><head>
+<link rel="stylesheet" type="text/css" href="https://4feuilles.org/css/4feuilles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
+<script src="https://4feuilles.org/js/scripts.js"></script><head>
 <script type="text/javascript">
     var value = readCookie("theme");
 	if (value == null) {
-        changeCSS("https://boards.neonroot.net/css/neonroot.css", 0);
+        changeCSS("https://4feuilles.org/css/4feuilles.css", 0);
         }else {
 	changeCSS(value, 0);
         }
@@ -416,6 +413,15 @@ function head(&$dat) {
 <meta http-equiv="content-type"  content="text/html;charset=utf-8" />
 <!-- meta HTTP-EQUIV="pragma" CONTENT="no-cache" -->
 <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-157617436-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag("js", new Date());
+
+  gtag("config", "UA-157617436-1");
+</script>
 
 
 ';
@@ -427,33 +433,56 @@ function l(e) {var P=getCookie("pwdc"),N=getCookie("namec"),i;with(document) {fo
 	if (OEKAKI_ENABLED) {$dat.='<script src="js/ritare/jscolor/jscolor.min.js"></script><script src="js/ritare/ritare.js"></script><link rel="stylesheet" type="text/css" href="js/ritare/ritare.css" />';}
 	$dat.='</head>
 	<body>
-	<div class="styles">
+	<div class="menu-normal"><div class="styles">
 	
-	[<a href="#" onclick="changeCSS(\'https://boards.neonroot.net/css/neonroot.css\', 0);document.cookie=\'theme=https://boards.neonroot.net/css/neonroot.css\';">Style Nuit</a>] 
+	[<a href="#" onclick="changeCSS(\'https://4feuilles.org/css/4feuilles.css\', 0);document.cookie=\'theme=https://4feuilles.org/css/4feuilles.css\';">Style Nuit</a>] 
     
-	[<a href="#" onclick="changeCSS(\'https://boards.neonroot.net/css/neonroot_claire.css\', 0);document.cookie=\'theme=https://boards.neonroot.net/css/neonroot_claire.css\';">Style Océan</a>]	
+	[<a href="#" onclick="changeCSS(\'https://4feuilles.org/css/4feuilles_claire.css\', 0);document.cookie=\'theme=https://4feuilles.org/css/4feuilles_claire.css\';">Style Océan</a>]	
 	
 	';
 	$dat.='</div>
 	<div class="adminbar">
-	[<a href="https://boards.neonroot.net" target="_top">Accueil</a>]
-	[<a href="https://boards.neonroot.net/ge/" target="_top">/ge/</a>]
-	[<a href="https://boards.neonroot.net/an/" target="_top">/an/</a>]
-	[<a href="https://boards.neonroot.net/po/" target="_top">/po/</a>]
-	[<a href="https://boards.neonroot.net/te/" target="_top">/te/</a>]
-	[<a href="https://boards.neonroot.net/je/" target="_top">/je/</a>]
-	[<a href="https://boards.neonroot.net/di/" target="_top">/di/</a>]
-	[<a href="https://boards.neonroot.net/ar/" target="_top">/ar/</a>]
-	[<a href="https://boards.neonroot.net/cu/" target="_top">/cu/</a>]
+	[<a href="https://4feuilles.org" target="_top">Accueil</a>]
+	[<a href="https://planches.4feuilles.org/gen/" target="_top">/gen/</a>]
+	[<a href="https://planches.4feuilles.org/ani/" target="_top">/ani/</a>]
+	[<a href="https://planches.4feuilles.org/pol/" target="_top">/pol/</a>]
+	[<a href="https://planches.4feuilles.org/tec/" target="_top">/tec/</a>]
+	[<a href="https://planches.4feuilles.org/jeu/" target="_top">/jeu/</a>]
+	[<a href="https://planches.4feuilles.org/ale/" target="_top">/ale/</a>]
+	[<a href="https://planches.4feuilles.org/art/" target="_top">/art/</a>]
+	[<a href="https://planches.4feuilles.org/cul/" target="_top">/cul/</a>]
 	</div>
-	<br>
-	<div class="logo"><br>'.$titlepart.' </div> <hr class="logohr" /><br /><br /> <br>';
+	</div>
+	
+	
+	
+	
+	<div class="menu-mobile"onclick="mobile(this)">
+	[<a id="bouton-mobile">Menu</a>]
+	<ul id="mobile-cacher">
+	<li><a href="#" onclick="changeCSS(\'https://4feuilles.org/css/4feuilles.css\', 0);document.cookie=\'theme=https://4feuilles.org/css/4feuilles.css\';">Style Nuit</a></li>
+	<li><a href="#" onclick="changeCSS(\'https://4feuilles.org/css/4feuilles_claire.css\', 0);document.cookie=\'theme=https://4feuilles.org/css/4feuilles_claire.css\';">Style Océan</a></li>
+	<li><a href="https://4feuilles.org" target="_top">Accueil</a></li>
+	<li><a href="https://planches.4feuilles.org/gen/" target="_top">/gen/</a></li>
+	<li><a href="https://planches.4feuilles.org/ani/" target="_top">/ani/</a></li>
+	<li><a href="https://planches.4feuilles.org/pol/" target="_top">/pol/</a></li>
+	<li><a href="https://planches.4feuilles.org/tec/" target="_top">/tec/</a></li>
+	<li><a href="https://planches.4feuilles.org/jeu/" target="_top">/jeu/</a></li>
+	<li><a href="https://planches.4feuilles.org/ale/" target="_top">/ale/</a></li>
+	<li><a href="https://planches.4feuilles.org/art/" target="_top">/art/</a></li>
+	<li><a href="https://planches.4feuilles.org/cul/" target="_top">/cul/</a></li>
+	</ul>
+	</div>
+	
+	
+	
+	<div class="logo"><br>'.$titlepart.' <br> <script data-cfasync="false" type="text/javascript" src="https://www.geniusdexchange.com/a/display.php?r=2961631"></script>   </div> <hr class="logohr" /><br /><br /> <br>';
 }
 /* Contribution form */
 function form(&$dat,$resno,$admin="",$manapost=false) {
 	$maxbyte = MAX_KB * 1024;
 	$no=$resno;
-	if ($admin) $msg = "<em>".S_NOTAGS."  </em>";
+	if ($admin) $msg = "<em>".S_NOTAGS.".</em>";
 	else $msg = '';
 
 	$dat.=$msg.'<div class="centered"><div class="postarea">
@@ -500,8 +529,8 @@ function fakefoot() {
 /* Footer */
 function foot(&$dat) {
 	$dat.="
-<div class=\"footer\"> <br>".S_FOOT."<br />
-Neonroot ".S_VERSION." ".VERSION."<br />
+<div class=\"footer\"><script data-cfasync=\"false\" type=\"text/javascript\" src=\"https://www.geniusdexchange.com/a/display.php?r=2961631\"></script>  <br>".S_FOOT."<br />
+4feuilles ".S_VERSION." ".VERSION."<br />
 ".S_NAMEVERSION."
 </div>
 </body></html>\n";
@@ -701,9 +730,9 @@ function regist($ip,$name,$capcode,$email,$sub,$com,$oekaki,$url,$pwd,$upfile,$u
 	$c_pass = $pwd;
 	$pass = ($pwd) ? substr(md5($pwd),2,8) : "*";
 	$youbi = array(S_SUN, S_MON, S_TUE, S_WED, S_THU, S_FRI, S_SAT);
-	$yd = $youbi[gmdate("w", $time+2*60*60)] ;
-	$now = gmdate("y/m/d",$time+2*60*60)."(".(string)$yd.")".gmdate("H:i",$time+2*60*60);
-	$posterid = substr(crypt(md5($_SERVER["REMOTE_ADDR"].'id'.gmdate("Ymd", $time+2*60*60)),'id'),-8);
+	$yd = $youbi[gmdate("w", $time+TIMEZONE*60*60)] ;
+	$now = gmdate(DATEFORMAT,$time+TIMEZONE*60*60)."(".(string)$yd.")".gmdate("H:i",$time+TIMEZONE*60*60);
+	$posterid = substr(crypt(md5($_SERVER["REMOTE_ADDR"].'id'.gmdate("Ymd", $time+TIMEZONE*60*60)),'id'),-8);
 	// Text plastic surgery (rorororor)
 	$email = CleanStr($email); $email = preg_replace("/[\r\n]/", "", $email);
 	$sub = CleanStr($sub); $sub = preg_replace("/[\r\n]/", "", $sub);
@@ -925,9 +954,9 @@ function thumb($path, $tim, $ext) {
 	$backing = imagecolorallocate($im_out,...THUMBBACK);
 	imagefill($im_out, 0, 0, $backing);
 	// copy resized original
-	ImageCopyResized($im_out, $im_in, 0, 0, 0, 0, $out_w, $out_h, $size[0], $size[1]);
+	imagecopyresampled($im_out, $im_in, 0, 0, 0, 0, $out_w, $out_h, $size[0], $size[1]);
 	// thumbnail saved
-	ImageJPEG($im_out, $thumb_dir.$tim.'s.jpg',60);
+	ImageJPEG($im_out, $thumb_dir.$tim.'s.jpg',80);
 	chmod($thumb_dir.$tim.'s.jpg',0666);
 	// created image is destroyed
 	ImageDestroy($im_in);
@@ -1045,14 +1074,14 @@ function adminhead() {
 	echo("[<a class='admp$admin' href='".PHP_SELF."?mode=admin&admin=post'>".S_MANAPOST."</a>] ");
 	echo("[<a class='adma$admin' href='".PHP_SELF."?mode=admin&admin=acc'>".S_MANAACCS."</a>] ");
 	echo("[<a href='".PHP_SELF."?mode=admin&admin=logout'>".S_LOGOUT."</a>]</div>");
-	echo("<div class='manabuttons'>[<a href='https://boards.neonroot.net/ge/imgboard.php?mode=admin' target='_top'>/ge/</a>]
-	[<a href='https://boards.neonroot.net/an/imgboard.php?mode=admin' target='_top'>/an/</a>]
-	[<a href='https://boards.neonroot.net/po/imgboard.php?mode=admin' target='_top'>/po/</a>]
-	[<a href='https://boards.neonroot.net/te/imgboard.php?mode=admin' target='_top'>/te/</a>]
-	[<a href='https://boards.neonroot.net/je/imgboard.php?mode=admin' target='_top'>/je/</a>]
-	[<a href='https://boards.neonroot.net/di/imgboard.php?mode=admin' target='_top'>/di/</a>]
-	[<a href='https://boards.neonroot.net/ar/imgboard.php?mode=admin' target='_top'>/ar/</a>]
-	[<a href='https://boards.neonroot.net/cu/imgboard.php?mode=admin' target='_top'>/cu/</a>]</div>");
+	echo("<div class='manabuttons'>[<a href='https://planches.4feuilles.org/gen/imgboard.php?mode=admin' target='_top'>/gen/</a>]
+	[<a href='https://planches.4feuilles.org/ani/imgboard.php?mode=admin' target='_top'>/ani/</a>]
+	[<a href='https://planches.4feuilles.org/pol/imgboard.php?mode=admin' target='_top'>/pol/</a>]
+	[<a href='https://planches.4feuilles.org/tec/imgboard.php?mode=admin' target='_top'>/tec/</a>]
+	[<a href='https://planches.4feuilles.org/jeu/imgboard.php?mode=admin' target='_top'>/jeu/</a>]
+	[<a href='https://planches.4feuilles.org/ale/imgboard.php?mode=admin' target='_top'>/ale/</a>]
+	[<a href='https://planches.4feuilles.org/art/imgboard.php?mode=admin' target='_top'>/art/</a>]
+	[<a href='https://planches.4feuilles.org/cul/imgboard.php?mode=admin' target='_top'>/cul/</a>]</div>");
 }
 
 /*password validation */
@@ -1086,6 +1115,7 @@ function valid($pass) {
 		echo "<br /><div class='centered'><form action=\"".PHP_SELF."\" method=\"post\">";
 		echo "<input type=hidden name=mode value=admin />";
 		echo "<input type=password name=pass size=8>";
+		echo "<input type=code name=code size=8>";
 		echo "<input type=submit value=\"".S_MANASUB."\"></form></div>";
 		die(fakefoot());
 	}

@@ -10,6 +10,8 @@ const BANNERS = array('title1.png', 'title2.png');	// Banners for SHOWTITLEIMG=2
 const TITLEIMG = 'title.png';			//Title image for SHOWTITLEIMG=1
 const LANGUAGE = 'en';				//Language. Fikaba provides en and ja by default
 const FOOTTEXT = '';				//Extra footer text, for disclaimers and such. Can be left empty
+const TIMEZONE = 1;					// Time Zone in GTM Ex: 1 = GTM+1
+const DATEFORMAT = 'd/m/y'			// Set date format Ex: d/m/y = Day Month Year 
 
 // Database settings
 const POSTTABLE = 'CHANGEME';			//Post table (NOT DATABASE)
