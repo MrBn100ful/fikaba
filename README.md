@@ -1,6 +1,6 @@
-# Neonroot
+# 4feuilles.org
 
-This is a version off fikaba modified for the french imageboard https://boards.neonroot.net/ .
+This is a version off fikaba modified for the french imageboard https://4feuilles.org .
 
 The only supported language is french.
 
@@ -16,7 +16,6 @@ Fikaba is an imageboard engine forked from Futallaby aiming to be more standards
 * Tripcodes, capcodes
 * Highly configurable
 * Post references
-* Oekaki
 * [...and more](https://github.com/mrbn100ful/fikaba/blob/master/docs/features.md)
 
 ## Installation
