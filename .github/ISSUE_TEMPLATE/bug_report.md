@@ -27,6 +27,7 @@ If applicable, add screenshots to help explain your problem.
 - Server: [e.g. nginx, apache]
 - SQL server: [e.g. mariadb, mysql]
 - Fikaba version: [e.g. 181008]
+- PHP version: [e.g. 7.0]
 
 ## Additional context
 Add any other context about the problem here.
