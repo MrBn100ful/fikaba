@@ -2,7 +2,7 @@
 
 This is a version off fikaba modified for the french imageboard https://4feuilles.org .
 
-The only supported language is french.
+The only supported languages are French and Polish.
 
 # Fikaba
 Fikaba is an imageboard engine forked from Futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of Futallaby, since Futallaby has become abandonware.
