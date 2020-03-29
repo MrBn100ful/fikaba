@@ -31,3 +31,15 @@ function getCookie(name) {
 function mobile(x) {
   document.getElementById("mobile-cacher").classList.toggle("show");
 };
+
+
+
+
+$(function() {
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+if (isMobile) {
+  			changeCSS('https://4feuilles.org/css/4feuilles_mobile.css',0);
+			document.cookie='theme=https://4feuilles.org/css/4feuilles_mobile.css';
+};
+});

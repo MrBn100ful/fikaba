@@ -1,32 +1,38 @@
- body {
-    font-size: 14px;
+html{
+	font-size: 14px;
+	font-family: 'Roboto', sans-serif;
+}
+
+body {
+    
     background: #1d1f21;
     color: #ffffff;
-    font-family: 'Roboto', sans-serif;
     margin: 5px;
+    background-image: url(https://4feuilles.org/css/background.png);
+    background-position: center center;
+    background-repeat: repeat;
 
 }
 
 a {
     background: inherit;
-    color: #68F96A;
+    color: #6ac6fc;
     text-decoration: underline;
-    font-family: serif;
     cursor: pointer;
 }
 
 a:visited {
     background: inherit;
-    color: #68F96A;
+    color: #6ac6fc;
     text-decoration: underline;
 }
 
 input[type=button],
 input[type=submit],
 input[type=reset] {
-    background-color: #282a2e;
+    background-color:rgba(0, 0, 0, .7);
     border: hidden;
-    color: #68F96A;
+    color: #6ac6fc;
     padding: 4px 4px;
     text-decoration: none;
     margin: 1px 1px;
@@ -41,7 +47,7 @@ input[type=reset] {
 }
 .menu-normal{
 
-	background-color: #282a2e;
+	background-color: rgba(0, 0, 0 ,.8);
 	padding-bottom: 23px;
 	
 }
@@ -51,36 +57,51 @@ a:hover,
 .admbban,
 .admppost,
 .admaacc {
-    color: #6ac6fc !important;
+    color: #0055A4 !important;
     background: inherit;
     text-decoration: underline;
 }
 
 .reflink,
 .reflink:visited {
-    color: #68F96A;
+    color: #EF4135;
     text-decoration: none;
 }
 
-.reflink:hover {
-    color: #68F96A;
-    text-decoration: none;
-}
-
-.showboards{
-    display: inline-block;
-    float: none;
-    border-color: #777777;
+.showboards,.news{
+    border-color: #EF4135;
     border-style: solid;
-    border-width: 4px;
+    border-width: 1px;
     text-align: left;
     font-size: 28px;
     padding-left: 30px;
     padding-right: 30px;
     padding-bottom: 30px;
+	margin-left:30px;
+	margin-right:30px;
     vertical-align: top;
     border-radius: 8px;
+    background-color: rgba(0, 0, 0, .7);
 }
+
+.news{
+	flex: 2;
+	font-size: 16px;
+	max-width:400px;
+}
+
+.showboards{
+	flex:1;	
+}
+
+
+.flexbox{
+	display: flex;
+	justify-content: center;
+}
+
+
+
 
 .menu-mobile {
     display: none;
@@ -91,7 +112,7 @@ a:hover,
 }
 
 .boardslistesfw {
-    background-color: #68F96A;
+    background-color: #6ac6fc;
 	color: black;
 	padding-left: 15px;
 }
@@ -103,6 +124,16 @@ img {
     float: left;
     clear: none;
 }
+
+hr{
+    
+    background-color: #EF4135;
+    height: 1px;
+    border: none;
+    
+}
+
+
 
 td {
     text-align: left;
@@ -126,7 +157,7 @@ td {
     text-align: center;
     background: inherit;
     font-size: 24pt;
-    color: #68F96A;
+    color: #6ac6fc;
     width: 100%;
 }
 
@@ -152,7 +183,7 @@ td {
 }
 
 .postblocktitle {
-    background: #282a2e;
+    background: rgba(0, 0, 0 ,.8);
     text-align: center;
     color: #ffffff;
     font-weight: 800;
@@ -160,7 +191,7 @@ td {
 }
 
 .postblock {
-    background: #282a2e;
+    background: rgba(0, 0, 0 ,.8);
     color: #ffffff;
     font-weight: 800;
     border-radius: 5px;
@@ -174,7 +205,7 @@ td {
 }
 
 .passvalid {
-    background: #282a2e;
+    background: rgba(0, 0, 0 ,.8);
     text-align: center;
     width: 100%;
     color: #ffffff;
@@ -228,13 +259,13 @@ td {
 
 .filetitle {
     background: inherit;
-    color: #68F96A !important;
+    color: #6ac6fc !important;
     font-weight: 800;
 }
 
 .postername {
     background: inherit;
-    color: #10ec7c;
+    color: #6ac6fc;
     font-weight: 800;
 }
 
@@ -253,7 +284,7 @@ td {
 }
 
 .reply {
-    background: #282a2e;
+    background: rgba(0, 0, 0 ,.8);
     min-width: 700px;
     border-radius: 5px;
     padding: 5px;
@@ -275,7 +306,7 @@ td {
 
 .commentpostername {
     background: inherit;
-    color: #10ec7c;
+    color: #6ac6fc;
     font-weight: 800;
 }
 
@@ -327,7 +358,7 @@ td {
     max-height: 220px;
     width: 180px;
     height: 250px;
-    border-color: #282a2e;
+    border-color: rgba(0, 0, 0 ,.8);
     border-style: solid;
     border-width: 2px;
     text-align: center;
@@ -383,24 +414,21 @@ td {
 (pointer:coarse) {
 
     html {
-        font-size: 30px;
+        font-size: 20px !important;
 	}
  .catthread {
     max-width: 570px;
     max-height: 420px;
     width: 380px;
     height: 350px;
-    font-size: 25px;
 
 }
-.rules{
-	font-size:20px;
+	.flexbox{
+	flex-flow: column;	
 	}
-	.filesize{
-	font-size:15px;
-	}
-	.filetitle{
-	font-size: 25px;
+	.news{
+	max-width:100%;
+	margin-top: 20px;
 	}
 
 
@@ -411,7 +439,7 @@ td {
 
     .footer,
     blockquote {
-        font-size: 25px;
+		font-size:30px;
     }
 
 	.reply {
@@ -419,20 +447,17 @@ td {
 }
     .showboards,
     .regle {
-        width: 90%;
-        font-size: 40px;
+        width: 87%;
     }
 
     .menu-mobile {
         display: block;
-        font-size: 40px;
         text-align: center;
-        font-size: 40px;
     }
 
     .logo {
-        font-size: 65px;
         padding-top: 15px;
+		font-size:40px;
     }
 
     .show {
@@ -445,3 +470,4 @@ td {
 
 
 }
+
