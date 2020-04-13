@@ -33,9 +33,16 @@ function mobile(x) {
 };
 
 
-
-
 $(function() {
+	
+var value = readCookie("theme");
+	
+if (value == null) {
+		changeCSS("https://4feuilles.org/css/4feuilles.css", 0);
+} else {
+        changeCSS(value, 0);
+}
+	
 var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
 if (isMobile) {

@@ -13,9 +13,9 @@ const S_NAME = 'nom'; // Décrit le champ du nom
 const S_CAPCODE = 'Capcode'; // Décrit le champ capcode (admin)
 const S_REPLYTO = 'Répondre à'; // Décrit la réponse au champ (admin)
 const S_EMAIL = 'E-mail'; // Décrit le champ e-mail
-const S_SUBJECT = 'Sujet'; // Décrit le sujet
+const S_SUBJECT = 'Titre'; // Décrit le sujet
 const S_SUBMIT = 'Poster'; // Décrit le bouton d'envoi
-const S_COMMENT = 'Comment'; // Décrit le champ de commentaire
+const S_COMMENT = 'Message'; // Décrit le champ de commentaire
 const S_OEKAKI = 'Oekaki';
 const S_OEKAKILOAD = 'Cliquez pour charger oekaki (n oubliez pas de sauvegarder!)';
 const S_UPLOADFILE = 'Fichier'; // Décrit le champ du fichier
@@ -29,9 +29,9 @@ const S_RULES_SWF = '<ul> <li>Vous pouvez poster tout ce que vous voulez tant qu
 <li> Les types de fichiers pris en charge sont: GIF, JPG, PNG, SWF </ li>
 <li> La taille de fichier maximale autorisée est '.MAX_KB.' KB. </ Li>
 <li> Les images supérieures à '.MAX_W.'x'.MAX_H.' les pixels seront miniatures. </ li> </ ul> '; // Imprime les règles sous la section de publication
-const S_RULES_WEBM = '<ul><li> Pas de contenue illégale en France ( Gore, Racisme, PedoPorn). </ li>
-<li> Les spams/pubs seront supprimers. </ li>
-<li> Les formats de fichier supportés sont JPG, PNG, GIF et WEBM. </ li>
+const S_RULES_WEBM = '<ul><li> Pas de contenu illégal en France (ex : gore, racisme, pédoporn...).</ li>
+<li> Les spams/pubs seront supprimées. </ li>
+<li> Les formats de fichier supportés sont JPG, PNG, GIF, WEBM et MP4. </ li>
 <li> La taille de fichier maximal autorisé est '.MAX_KB.' KB. </ Li>
 <li> Les images supérieures à '.MAX_W.'x'.MAX_H.' seront réduites. </ li> </ ul> '; // Imprime les règles sous la section de publication
 const S_RULES_BOTH = '<ul> <li>Vous pouvez poster tout ce que vous voulez tant que c est légal en France.</ li>
@@ -43,8 +43,8 @@ const S_WEBM_DISABLED = "Erreur: le téléchargement des fichiers WebM est actue
 const S_REPORTERR = 'Erreur: réponse introuvable.'; // Retourne une erreur lorsqu'une réponse (res) est introuvable
 const S_THUMB = ''; // Imprime les instructions pour visualiser les sources réelles
 const S_PICNAME = 'Fichier:'; // Imprime le texte avant de télécharger le nom / lien
-const S_REPLY = 'Répondre'; // Imprime le texte du lien de réponse
-const S_ABBR = ' Messages tronqués. Cliquez sur Répondre pour affichers '; // Imprime le texte à afficher lorsque les réponses sont masquées
+const S_REPLY = 'Répondre au fil'; // Imprime le texte du lien de réponse
+const S_ABBR = ' Messages tronqués. Cliquez ici affichers '; // Imprime le texte à afficher lorsque les réponses sont masquées
 const S_REPDEL = 'Supprimer un message'; // Imprime le texte à côté de S_DELPICONLY (à gauche)
 const S_DELPICONLY = 'Fichier seulement'; // Imprime le texte à côté de la case à cocher pour la suppression du fichier (droite)
 const S_DELKEY = 'Mot de passe'; // Imprime le texte à côté du champ mot de passe pour suppression (à gauche)
@@ -52,7 +52,7 @@ const S_DELETE = 'Supprimer'; // Définit le nom du bouton de suppression
 const S_PREV = 'Précédent'; // Définit le bouton précédent
 const S_NEXT = 'Suivant'; // Définit le bouton suivant
 const S_REFRESH = 'Rafraîchir'; // Définit le bouton rafraîchir
-const S_FOOT = '- GazouBBS + <a href="http://www.2chan.net/" target="_blank"> futaba </a> + <a href = "http://www.1chan.net/ futallaby / "target =" _ blank "> futallaby </a> + <a href="https://github.com/knarka/fikaba" target="_blank"> fikaba </a> + <a href ="https://github.com/MrBn100ful/fikaba" target =" _ blank "> Neonroot </a> - '; // Imprime le pied de page (laisse ces crédits)
+const S_FOOT = '- GazouBBS + <a href="http://www.2chan.net/" target="_blank"> futaba </a> + <a href = "http://www.1chan.net/ futallaby / "target =" _ blank "> futallaby </a> + <a href="https://github.com/knarka/fikaba" target="_blank"> fikaba </a> - '; // Imprime le pied de page (laisse ces crédits)
 const S_UPFAIL = 'Erreur: le téléchargement a échoué.'; // Retourne une erreur en cas d'échec du téléchargement (motif: inconnu?)
 const S_NOREC = 'Erreur: enregistrement introuvable.'; // Retourne une erreur lorsque l'enregistrement est introuvable
 const S_SAMEPIC = 'Erreur: somme de contrôle md5 en double détectée.'; // Retourne une erreur quand une dupe de somme de contrôle md5 est détectée
@@ -138,5 +138,3 @@ const S_ACCDEL = 'Peut supprimer des publications? ';
 const S_ACCBAN = 'Peut interdire les utilisateurs? ';
 const S_ACCCAP = 'Peut-on poster avec capcode? ';
 const S_ACCACC = 'Peut créer de nouveaux comptes? ';
-const S_VERSION = 'version';
-const S_NAMEVERSION= 'Beta 1.4';

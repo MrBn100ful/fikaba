@@ -17,7 +17,7 @@ body {
 a {
     background: inherit;
     color: #e44813;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
 }
 
