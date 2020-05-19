@@ -22,6 +22,10 @@ This guide assumes you have a webserver with PHP (7.0 at least) already installe
 5. Log in to the default admin account (password REPLACEME) and create a new account. The default one will be automatically removed
 6. Pour yourself some puerh and admire your professional adminship
 
+## Webring
+
+see https://github.com/MrBn100ful/4feuilles-webring
+
 ## Migrating
 If you come from Fikaba simply drag and drop the new files and remove old ones.
 [See here for info on migrating from Futallaby](https://github.com/mrbn100ful/4feuilles/blob/master/docs/migrate.md)
