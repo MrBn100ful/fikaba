@@ -23,8 +23,7 @@ This guide assumes you have a webserver with PHP (7.0 at least) already installe
 6. Pour yourself some puerh and admire your professional adminship
 
 ## Updating
-[See here](https://github.com/mrbn100ful/fikaba/blob/master/docs/update.md)
-[See here for info on migrating from Futallaby](https://github.com/knarka/fikaba/blob/master/docs/migrate.md)
+[See here for info on migrating from Futallaby](https://github.com/mrbn100ful/4feuilles/blob/master/docs/migrate.md)
 
 ## License
 See the file LICENSE.
