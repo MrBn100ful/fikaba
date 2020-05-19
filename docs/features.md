@@ -2,7 +2,6 @@
 * MySQL database
 * Configurable
 * Image posting (including replying), automatic thumbnailing (GIF, JPG, PNG)
-* Flash support
 * WebM support
 * Fairly advanced manager panel
 * Raw HTML posting for managers
@@ -17,10 +16,9 @@
 * Image replies
 * Post references (>>###)
 * IP bans
-* noko/nonoko (noko by default)
 * Catalogs
 * [JSON API](https://github.com/mrbn100ful/fikaba/blob/master/docs/api.md)
 * Forced anonymous
-* Oekaki
 * Lockdown
 * Word filters
+* hcaptcha
