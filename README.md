@@ -23,7 +23,7 @@ This guide assumes you have a webserver with PHP (7.0 at least) already installe
 6. Pour yourself some puerh and admire your professional adminship
 
 ## Migrating
-If you come from Fikaba simple drog and drop the new file and remove old one.
+If you come from Fikaba simply drag and drop the new files and remove old ones.
 [See here for info on migrating from Futallaby](https://github.com/mrbn100ful/4feuilles/blob/master/docs/migrate.md)
 
 ## License
