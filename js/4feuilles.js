@@ -1,3 +1,22 @@
+var Alltext = "";
+$(function() {
+	
+var value = readCookie("theme");
+	
+if (value == null) {
+		changeCSS("https://4feuilles.org/css/4feuilles_claire.css", 0);
+} else {
+        changeCSS(value, 0);
+}
+	
+var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+if (isMobile) {
+  			changeCSS('https://4feuilles.org/css/4feuilles_mobile.css',0);
+			document.cookie='theme=https://4feuilles.org/css/4feuilles_mobile.css';
+};
+});
+
 function readCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -19,6 +38,8 @@ function changeCSS(cssFile, cssLinkIndex) {
     newlink.setAttribute("href", cssFile);
 
     document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
+    
+    document.cookie='theme='+cssFile+';domain=.4feuilles.org;path=/';
 }
 
 function getCookie(name) {
@@ -33,20 +54,27 @@ function mobile(x) {
 };
 
 
-$(function() {
-	
-var value = readCookie("theme");
-	
-if (value == null) {
-		changeCSS("https://4feuilles.org/css/4feuilles.css", 0);
-} else {
-        changeCSS(value, 0);
-}
-	
-var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+function hideform(x) {
+  document.getElementById("postarea-hidden").classList.toggle("show");
+  const fileInput = document.querySelector('.label-file input[type=file]');
+  fileInput.onchange = () => {
+    if (fileInput.files.length > 0) {
+      const fileName = document.querySelector('.file-name');
+      fileName.textContent = fileInput.files[0].name;
+    }
+  }
 
-if (isMobile) {
-  			changeCSS('https://4feuilles.org/css/4feuilles_mobile.css',0);
-			document.cookie='theme=https://4feuilles.org/css/4feuilles_mobile.css';
 };
-});
+
+
+function addref(text) {
+    Alltext += text;
+    document.getElementById("com").value = Alltext;
+}
+
+
+
+
+
+
+

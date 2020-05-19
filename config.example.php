@@ -12,6 +12,8 @@ const LANGUAGE = 'en';				//Language. Fikaba provides en and ja by default
 const FOOTTEXT = '';				//Extra footer text, for disclaimers and such. Can be left empty
 const TIMEZONE = 1;					// Time Zone in GTM Ex: 1 = GTM+1
 const DATEFORMAT = 'd/m/y';			// Set date format Ex: d/m/y = Day Month Year 
+const HCAPTCHASECRET = '';			// your hcaptcha secret
+const HCAPTSITEKEY = ''; 			// your hcaptcha site key
 
 // Database settings
 const POSTTABLE = 'CHANGEME';			//Post table (NOT DATABASE)

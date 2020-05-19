@@ -22,3 +22,4 @@
 * Lockdown
 * Word filters
 * hcaptcha
+* Risibank

@@ -1,13 +1,13 @@
-@import "https://4feuilles.org/css/risibank_claire.css";
-@import "https://4feuilles.org/css/webring_claire.css";
+@import "https://4feuilles.org/css/risibank_sombre.css";
+@import "https://4feuilles.org/css/webring_sombre.css";
 html {
  font-size:14px;
  font-family:roboto,
  sans-serif
 }
 body {
- background:#eff0f1;
- color:#0b0b0b;
+ background:#121212;
+ color:#fff;
  margin:auto
 }
 a {
@@ -19,7 +19,6 @@ a {
 }
 a:visited {
  background:inherit;
- color:#002f54;
  text-decoration:underline;
  outline:0
 }
@@ -37,7 +36,7 @@ button,
  text-decoration:none;
  text-align:center;
  cursor:pointer;
- background-color:#0066b7;
+ background-color:#3c3c3c;
  color:#fff;
  box-shadow:0 2px 3px 0 rgba(0,0,0,.16),0 0 3px 0 rgba(0,0,0,.12);
  border-radius:2px;
@@ -47,7 +46,7 @@ button,
 button:hover,
 input[type=submit]:hover,
 .label-file:hover {
- background-color:#0097f2
+ background-color:#616161
 }
 button::-moz-focus-inner,
 input::-moz-focus-inner,
@@ -67,16 +66,12 @@ input::-moz-focus-inner,
  top:0;
  left:0;
  right:0;
- background-color:#0066b7;
+ background-color:#3c3c3c;
  box-shadow:0 2px 3px 0 rgba(0,0,0,.16),0 0 3px 0 rgba(0,0,0,.12);
  color:#fff
 }
 #logocolor {
  background-color:#0066b7;
- color:#fff;
- width:auto;
- box-shadow:0 2px 3px 0 rgba(0,0,0,.16),0 0 3px 0 rgba(0,0,0,.12);
- padding-top:4px
 }
 .menu-normal {
  display:flex
@@ -145,7 +140,7 @@ a:hover,
  margin-right:30px;
  vertical-align:top;
  border-radius:2px;
- background-color:#fff;
+ background-color:#1f1f1f;
  height:400px;
  box-shadow:0 2px 3px 0 rgba(0,0,0,.16),0 0 3px 0 rgba(0,0,0,.12)
 }
@@ -173,7 +168,7 @@ a:hover,
 }
 .boardslistesfw {
  background-color:#0066b7;
- color:#fff;
+ color:#000;
  padding-left:15px
 }
 img,
@@ -193,7 +188,7 @@ img,
  margin:0
 }
 hr {
- background-color:#c4c4c4;
+ background-color:#2f2f2f;
  height:1px;
  border:none;
  margin:3px
@@ -209,7 +204,7 @@ td {
  text-align:center;
  background:inherit;
  font-size:24pt;
- color:#000;
+ color:#fff;
  width:100%
 }
 .logo img {
@@ -236,7 +231,7 @@ td {
  border-bottom:2px solid #cc1105 padding:20px
 }
 .postblock {
- background:#0066b7;
+ background:#1f1f1f;
  color:#fff;
  border-radius:2px;
  padding:5px;
@@ -246,11 +241,11 @@ td {
  text-align:center;
  font-size:12px;
  margin-top:20px;
- background:#fff;
+ background:#1f1f1f;
  box-shadow:0 2px 3px 0 rgba(0,0,0,.16),0 0 3px 0 rgba(0,0,0,.12)
 }
 .passvalid {
- background:#fff;
+ background:#1f1f1f;
  text-align:center;
  width:100%;
  color:#fff;
@@ -295,7 +290,7 @@ td {
 }
 .filetitle {
  background:inherit;
- color:#000!important;
+ color:#fff!important;
  font-weight:800;
  font-size:12px
 }
@@ -317,7 +312,6 @@ td {
  margin-left:30px
 }
 .reply {
-
  min-width:70em;
  max-width:70em;
  border-radius:2px;
@@ -325,11 +319,11 @@ td {
  box-shadow:0 2px 3px 0 rgba(0,0,0,.16),0 0 3px 0 rgba(0,0,0,.12)
 }
 .centermsg:nth-of-type(2n+1){
-  background:#eef5fc;
+  background:#262626;
   
 }
 .centermsg{
-  background: #fff;
+  background: #1f1f1f;
 }
 
 .doubledash {
@@ -389,12 +383,12 @@ td {
  vertical-align:top;
  margin:3px;
  border-radius:2px;
- background:#fff;
+ background:#1f1f1f;
  box-shadow:0 2px 3px 0 rgba(0,0,0,.16),0 0 3px 0 rgba(0,0,0,.12)
 }
 .cata {
  text-decoration:none!important;
- color:#1a1a1a!important
+ color:#fff!important
 }
 .catthumb {
  max-width:160px;
@@ -425,6 +419,9 @@ td {
 #errormsg {
  color:red;
  text-align:center
+}
+.legal {
+ background:#1f1f1f!important
 }
 .content {
  min-height:calc(100vh - 52px)

@@ -6,13 +6,13 @@ function adminhead()
     global $admin;
     head($dat);
     echo $dat;
-    echo ("<div class='passvalid'>" . S_MANAMODE . " <a href=\"" . PHP_SELF2 . "\">[" . S_RETURNS . "]</a></div>");
-    echo ("<div class='manabuttons'>[<a href='" . PHP_SELF . "'>" . S_LOGUPD . "</a>] ");
-    echo ("[<a class='admd$admin' href='" . PHP_SELF . "?mode=admin&admin=del'>" . S_MANAREPDEL . "</a>] ");
-    echo ("[<a class='admb$admin' href='" . PHP_SELF . "?mode=admin&admin=ban'>" . S_MANABAN . "</a>] ");
-    echo ("[<a class='admp$admin' href='" . PHP_SELF . "?mode=admin&admin=post'>" . S_MANAPOST . "</a>] ");
-    echo ("[<a class='adma$admin' href='" . PHP_SELF . "?mode=admin&admin=acc'>" . S_MANAACCS . "</a>] ");
-    echo ("[<a href='" . PHP_SELF . "?mode=admin&admin=logout'>" . S_LOGOUT . "</a>]</div>");
+    echo ("<div class='passvalid'>" . S_MANAMODE . " <a href=\"index.php\">[" . S_RETURNS . "]</a></div>");
+    echo ("<div class='manabuttons'>[<a href='index.php'>" . S_LOGUPD . "</a>] ");
+    echo ("[<a class='admd$admin' href='index.php?mode=admin&admin=del'>" . S_MANAREPDEL . "</a>] ");
+    echo ("[<a class='admb$admin' href='index.php?mode=admin&admin=ban'>" . S_MANABAN . "</a>] ");
+    echo ("[<a class='admp$admin' href='index.php?mode=admin&admin=post'>" . S_MANAPOST . "</a>] ");
+    echo ("[<a class='adma$admin' href='index.php?mode=admin&admin=acc'>" . S_MANAACCS . "</a>] ");
+    echo ("[<a href='index.php?mode=admin&admin=logout'>" . S_LOGOUT . "</a>]</div>");
     echo ("<div class='manabuttons'>" . $list . "</div>");
 }
 
@@ -23,7 +23,7 @@ function valid($pass)
         return;
     head($dat);
     echo $dat;
-    echo "<div class='passvalid'>" . S_MANAMODE . " <a href='" . PHP_SELF2 . "'>[" . S_RETURNS . "]</a> </div>";
+    echo "<div class='passvalid'>" . S_MANAMODE . " <a href='index.php'>[" . S_RETURNS . "]</a> </div>";
     if ($pass) {
         $result = mysqli_call("select name,password,capcode,candel,canban,cancap,canacc from " . MANATABLE);
         while ($row = mysqli_fetch_row($result)) {
@@ -36,7 +36,7 @@ function valid($pass)
                 $_SESSION["cancap"] = $cancap;
                 $_SESSION["canacc"] = $canacc;
                 echo ("<div class='passvalid'>" . S_MANALOGGEDIN . "</div>");
-                echo ("<meta http-equiv=\"refresh\" content=\"2;URL=" . PHP_SELF . "?mode=admin\" />");
+                echo ("<meta http-equiv=\"refresh\" content=\"2;URL=index.php?mode=admin\" />");
                 die(fakefoot());
             }
         }
@@ -46,10 +46,9 @@ function valid($pass)
 
     // Mana login form
     if (! $pass) {
-        echo "<br /><div class='centered'><form action=\"" . PHP_SELF . "\" method=\"post\">";
+        echo "<br /><div class='centered'><form action=\"index.php\" method=\"post\">";
         echo "<input type=hidden name=mode value=admin />";
         echo "<input type=password name=pass size=8>";
-        echo "<input type=code name=code size=8>";
         echo "<input type=submit value=\"" . S_MANASUB . "\"></form></div>";
         die(fakefoot());
     }
@@ -61,7 +60,7 @@ function adminacc($accname, $accpassword, $acccapcode, $accdel, $accban, $acccap
         die(S_NOPERMISSION);
     if (! $accname) {
         echo ('<div class="centered">');
-        echo "<p><form style='display: inline-block;' action=\"" . PHP_SELF . "\" method=\"post\">";
+        echo "<p><form style='display: inline-block;' action=\"index.php\" method=\"post\">";
         echo "<input type=hidden name=mode value=admin />";
         echo "<input type=hidden name=admin value=acc />";
         echo "<table><tbody>";
@@ -126,7 +125,7 @@ function adminban()
         }
     }
     echo ('<div class="centered">' . "");
-    echo "<p><form style='display: inline-block;' action=\"" . PHP_SELF . "\" method=\"post\">";
+    echo "<p><form style='display: inline-block;' action=\"index.php\" method=\"post\">";
     echo "<input type=hidden name=mode value=admin />";
     echo "<input type=hidden name=admin value=ban />";
     echo "<table><tbody>";
@@ -189,7 +188,7 @@ function admindel()
         mysqli_free_result($result);
     }
     // Deletion screen display
-    echo "<p><form action=\"" . PHP_SELF . "\" method=\"post\">";
+    echo "<p><form action=\"index.php\" method=\"post\">";
     echo "<input type=hidden name=mode value=admin>";
     echo "<input type=hidden name=admin value=del>";
     echo "<div class=\"delbuttons\"><input type=submit value=\"" . S_ITDELETES . "\">";

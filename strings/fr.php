@@ -6,9 +6,9 @@ const S_LOCKDOWN = 'Board is currently disabled. Please check back later';				//
 const S_HOME = 'Dernier poste'; // Transférer à la page d'accueil
 const S_ADMIN = 'Admin'; // Transférer au panneau de gestion
 const S_RETURN = 'Retour'; // retourne au tableau d'image
-const S_POSTING = 'Mode de publication: Réponse'; // Imprime le message dans la barre rouge en haut de l'écran de réponse
+const S_POSTING = 'Répondre au fil de discussion'; // Imprime le message dans la barre rouge en haut de l'écran de réponse
 const S_NOTAGS = 'Les balises HTML sont rapides.'; // Imprime un message sur le conseil d'administration
-const S_NEWTHREAD = 'Nouvelle discussion'; // En-tête pour le nouveau formulaire de thread
+const S_NEWTHREAD = 'Nouveau fil de discussion'; // En-tête pour le nouveau formulaire de thread
 const S_NAME = 'nom'; // Décrit le champ du nom
 const S_CAPCODE = 'Capcode'; // Décrit le champ capcode (admin)
 const S_REPLYTO = 'Répondre à'; // Décrit la réponse au champ (admin)
@@ -16,11 +16,12 @@ const S_EMAIL = 'E-mail'; // Décrit le champ e-mail
 const S_SUBJECT = 'Titre'; // Décrit le sujet
 const S_SUBMIT = 'Poster'; // Décrit le bouton d'envoi
 const S_COMMENT = 'Message'; // Décrit le champ de commentaire
+const S_VERIF = 'Vérification';
 const S_OEKAKI = 'Oekaki';
 const S_OEKAKILOAD = 'Cliquez pour charger oekaki (n oubliez pas de sauvegarder!)';
 const S_UPLOADFILE = 'Fichier'; // Décrit le champ du fichier
 const S_DELPASS = 'Mot de passe'; // Décrit le mot de passe
-const S_DELEXPL = '(Mot de passe utilisé pour la suppression du fichier) '; // Imprime l explication du mot de passe (à droite)
+const S_DELEXPL = '(Pour la suppression du message) '; // Imprime l explication du mot de passe (à droite)
 const S_RULES = '<ul> <li>Vous pouvez poster tout ce que vous voulez tant que c est légal en France.</ li>
 <li> Les formats de fichier supportés sont JPG, PNG et GIF. </ li>
 <li> La taille de fichier maximal autorisé est '.MAX_KB.' KB. </ Li>
@@ -29,8 +30,7 @@ const S_RULES_SWF = '<ul> <li>Vous pouvez poster tout ce que vous voulez tant qu
 <li> Les types de fichiers pris en charge sont: GIF, JPG, PNG, SWF </ li>
 <li> La taille de fichier maximale autorisée est '.MAX_KB.' KB. </ Li>
 <li> Les images supérieures à '.MAX_W.'x'.MAX_H.' les pixels seront miniatures. </ li> </ ul> '; // Imprime les règles sous la section de publication
-const S_RULES_WEBM = '<ul><li> Pas de contenu illégal en France (ex : gore, racisme, pédoporn...).</ li>
-<li> Les spams/pubs seront supprimées. </ li>
+const S_RULES_WEBM = '<ul>
 <li> Les formats de fichier supportés sont JPG, PNG, GIF, WEBM et MP4. </ li>
 <li> La taille de fichier maximal autorisé est '.MAX_KB.' KB. </ Li>
 <li> Les images supérieures à '.MAX_W.'x'.MAX_H.' seront réduites. </ li> </ ul> '; // Imprime les règles sous la section de publication
@@ -55,6 +55,7 @@ const S_REFRESH = 'Rafraîchir'; // Définit le bouton rafraîchir
 const S_FOOT = '- GazouBBS + <a href="http://www.2chan.net/" target="_blank"> futaba </a> + <a href = "http://www.1chan.net/ futallaby / "target =" _ blank "> futallaby </a> + <a href="https://github.com/knarka/fikaba" target="_blank"> fikaba </a> - '; // Imprime le pied de page (laisse ces crédits)
 const S_UPFAIL = 'Erreur: le téléchargement a échoué.'; // Retourne une erreur en cas d'échec du téléchargement (motif: inconnu?)
 const S_NOREC = 'Erreur: enregistrement introuvable.'; // Retourne une erreur lorsque l'enregistrement est introuvable
+const S_CAPTCHA = 'Erreur: il faut compléter le captcha.';
 const S_SAMEPIC = 'Erreur: somme de contrôle md5 en double détectée.'; // Retourne une erreur quand une dupe de somme de contrôle md5 est détectée
 const S_TOOBIG = 'Cette image est trop grande! Téléchargez quelque chose de plus petit! ';
 const S_TOOBIGORNONE = 'Soit cette image est trop grande ou il n y a pas d image du tout. Ouais. ';
