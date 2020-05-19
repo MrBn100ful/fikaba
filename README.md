@@ -22,7 +22,8 @@ This guide assumes you have a webserver with PHP (7.0 at least) already installe
 5. Log in to the default admin account (password REPLACEME) and create a new account. The default one will be automatically removed
 6. Pour yourself some puerh and admire your professional adminship
 
-## Updating
+## Migrating
+If you come from Fikaba simple drog and drop the new file and remove old one.
 [See here for info on migrating from Futallaby](https://github.com/mrbn100ful/4feuilles/blob/master/docs/migrate.md)
 
 ## License
