@@ -1,6 +1,6 @@
 # 4feuilles.org
 
-This is a version off fikaba modified for the french imageboard https://4feuilles.org .
+This is a version of fikaba modified for the french imageboard https://4feuilles.org .
 
 4feuilles is a fork of Fikaba witch is an imageboard engine forked from Futallaby aiming to be more standards-compatible, readable, usable, and generally an updated version of Futallaby, since Futallaby has become abandonware.
 
