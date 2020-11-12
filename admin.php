@@ -5,9 +5,11 @@ function adminhead()
     $list = boardslist(4);
     global $admin;
     head($dat);
+	$dat .= "<div class=\"content\">";
+	nav($dat);
     echo $dat;
     echo ("<div class='passvalid'>" . S_MANAMODE . " <a href=\"index.php\">[" . S_RETURNS . "]</a></div>");
-    echo ("<div class='manabuttons'>[<a href='index.php'>" . S_LOGUPD . "</a>] ");
+    echo ("<div class='manabuttons'>");
     echo ("[<a class='admd$admin' href='index.php?mode=admin&admin=del'>" . S_MANAREPDEL . "</a>] ");
     echo ("[<a class='admb$admin' href='index.php?mode=admin&admin=ban'>" . S_MANABAN . "</a>] ");
     echo ("[<a class='admp$admin' href='index.php?mode=admin&admin=post'>" . S_MANAPOST . "</a>] ");
@@ -22,6 +24,8 @@ function valid($pass)
     if (isset($_SESSION['capcode']))
         return;
     head($dat);
+	$dat .= "<div class=\"content\">";
+	nav($dat);
     echo $dat;
     echo "<div class='passvalid'>" . S_MANAMODE . " <a href='index.php'>[" . S_RETURNS . "]</a> </div>";
     if ($pass) {
@@ -37,7 +41,9 @@ function valid($pass)
                 $_SESSION["canacc"] = $canacc;
                 echo ("<div class='passvalid'>" . S_MANALOGGEDIN . "</div>");
                 echo ("<meta http-equiv=\"refresh\" content=\"2;URL=index.php?mode=admin\" />");
-                die(fakefoot());
+                foot($foot);
+                echo $foot;
+                die();
             }
         }
         die(S_WRONGPASS);
@@ -50,7 +56,9 @@ function valid($pass)
         echo "<input type=hidden name=mode value=admin />";
         echo "<input type=password name=pass size=8>";
         echo "<input type=submit value=\"" . S_MANASUB . "\"></form></div>";
-        die(fakefoot());
+        foot($foot);
+        echo $foot;
+        die();
     }
 }
 
@@ -73,7 +81,9 @@ function adminacc($accname, $accpassword, $acccapcode, $accdel, $accban, $acccap
         echo ('<tr><td class="postblock">' . S_ACCCAP . '</td><td><input type="checkbox" name="acccap" value=1 /></td></tr>');
         echo ('<tr><td class="postblock">' . S_ACCACC . '</td><td><input type="checkbox" name="accacc" value=1 /></td></tr>');
         echo ("</tbody></table></form></div>");
-        die(fakefoot());
+        foot($foot);
+        echo $foot;
+        die();
     }
     if (! $accdel)
         $accdel = 0;
@@ -138,7 +148,9 @@ function adminban()
     echo ('<tr><td class="postblock">' . S_MANARMALLP . '</td><td><input value="7" type="checkbox" name="rmallp" value="on" /></td></tr>');
     echo ('<tr><td class="postblock">' . S_MANAUNBAN . '</td><td><input value="7" type="checkbox" name="unban" value="on" /></td></tr>');
     echo ("</tbody></table></form></div>");
-    die(fakefoot());
+    foot($foot);
+    echo $foot;
+    die();
 }
 
 /* Admin deletion */
@@ -214,14 +226,14 @@ function admindel()
         if (strlen($name) > 10)
             $name = substr($name, 0, 9) . "...";
         $name = htmlspecialchars($name);
-        if (strlen($sub) > 10)
-            $sub = substr($sub, 0, 9) . "...";
+        if (strlen($sub) > 30)
+            $sub = substr($sub, 0, 28) . "...";
         if ($email)
             $name = "<a href=\"mailto:$email\">$name</a>";
         $com = str_replace("<br />", " ", $com);
         $com = htmlspecialchars($com);
-        if (strlen($com) > 20)
-            $com = substr($com, 0, 18) . "...";
+        if (strlen($com) > 50)
+            $com = substr($com, 0, 48) . "...";
         // Link to the picture
         if ($ext && is_file($path . $tim . $ext)) {
             $img_flag = true;
@@ -236,10 +248,13 @@ function admindel()
         }
         $class = ($j % 2) ? "row1" : "row2"; // BG color
 
+		$datetime = new DateTime("@$time");
+		$distime = $datetime->format('d-m-Y H:i:s');
+
         echo "<tr class=$class><td><input type=checkbox name=\"$no\" value=delete></td>";
-        echo "<td>$no</td><td>$now</td><td>$sub</td>";
-        echo "<td>$name</td><td>$ip</td><td>$com</td>";
-        echo "<td>$host</td><td>$clip($size)</td><td>$md5</td><td>$resto</td><td>$tim</td><td>$time</td>";
+        echo "<td>$no</td><td>$distime</td>";
+        echo "<td>$ip</td><td>$sub</td><td>$com</td>";
+        echo "<td>$clip($size)</td><td>$resto</td>";
         echo "</tr>";
     }
     mysqli_free_result($result);
@@ -249,7 +264,9 @@ function admindel()
 
     $all = (int) ($all / 1024);
     echo "[ " . S_IMGSPACEUSAGE . "<b>$all</b> KB ]";
-    die(fakefoot());
+    foot($foot);
+    echo $foot;
+    die();
 }
 
 function insertban($target, $days, $pubmsg, $privmsg, $bantype, $rmp, $rmallp, $unban)

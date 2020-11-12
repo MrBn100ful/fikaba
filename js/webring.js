@@ -224,7 +224,7 @@ let webring = {
 			
 			let topButtonsDiv = inner.appendChild(createEL("div", {className:"webringtopbuttons"}));
 			// refresh button
-			topButtonsDiv.appendChild(createEL("button", {type:"button", className:"webringrefreshbutton", textContent:"Rafraîchir la liste", event:["click", function(){
+			topButtonsDiv.appendChild(createEL("button", {type:"button", className:"webringrefreshbutton ui compact icon primary button", textContent:"Rafraîchir la liste", event:["click", function(){
 				this.textContent = "Chargement...";
 				webring.loadWebringJsons(webring.createWindowHtml);
 			}]}));
@@ -378,7 +378,7 @@ let webring = {
 				createEL("a", {textContent:"A-Z", dataset:{type:"uri"}, event:["click", selectSort]}),
 				createEL("a", {textContent:"Site", dataset:{type:""}, event:["click", selectSort]}),
 				// close button
-				createEL("button", {type:"button", className:"webringclosebutton", textContent:"X", event:[
+				createEL("button", {type:"button", className:"webringclosebutton ui compact icon primary button", textContent:"X", event:[
 					"click", function(){
 						con.classList.remove("open");
 					}

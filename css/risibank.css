@@ -1,3 +1,4 @@
+
 #risibank-overlay-container {
  position:fixed;
  bottom:0;
@@ -5,7 +6,8 @@
  width:100%;
  height:300px;
  text-align:center;
- background-color:rgba(3, 0, 21, 0.76);
+ background-color: var(--color22);
+ backdrop-filter: blur(5px);
 }
 #risibank-overlay-container.hidden {
  bottom:-320px
@@ -38,7 +40,7 @@
  overflow-y:scroll
 }
 .risibank {
- margin:0 0 0 90px;
+ margin:0;
  border:0;
  float:none
 }
@@ -70,21 +72,22 @@
  display:inline-block
 }
 #risibank-navigation>ul {
- margin-top:0
+ margin-top:0;
+ padding:0;
 }
 .risibank-navigation {
  display:inline;
  padding:.5rem .75rem;
  color:#fff;
- background-color:#030014;
- border:1px solid #0078d4;
+ background-color:#0066b7;
+ border:1px solid #0078d4
 }
 .risibank-navigation>a {
- color:#0275d8;
+ color:#fff;
  text-decoration:none
 }
 .risibank-navigation.selected {
- background-color:#02113b;
+ background-color:#0097f2;
 }
 .risibank-navigation.selected>a {
  color:#fff

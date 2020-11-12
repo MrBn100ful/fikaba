@@ -1,18 +1,20 @@
 <?php
 
-// 4feuilles build:200519
+// 4Feuilles build:200825
 //
 // For setup instructions and latest version, please visit:
-// https://github.com/knarka/fikaba
+// https://github.com/MrBn100ful/4feuilles
 //
-// Based on GazouBBS, Futaba, Futallaby, and Fikaba
-const S_NAMEVERSION = 'v2.1';
+// Based on GazouBBS, Futaba, Futallaby, Fikaba
+const S_NAMEVERSION = 'v3.2';
 
 include 'config.php';
 include 'boardslist.php';
 include 'catalog.php';
+// include 'forum.php';
 include 'post.php';
 include 'admin.php';
+include 'preview.php';
 include 'strings/' . LANGUAGE . '.php'; // String resource file
 
 if (LOCKDOWN) {
@@ -131,7 +133,6 @@ function humantime($time)
 function updatelog($resno = 0)
 {
     global $path;
-
     $find = false;
     $resno = (int) $resno;
     if ($resno) {
@@ -160,11 +161,11 @@ function updatelog($resno = 0)
     for ($page = 0; $page < $counttree; $page += PAGE_DEF) {
         $dat = '';
         head($dat);
-		$dat .= "<div class=\"content\">";
+		$dat .= "<div class=\"ui segment content\">";
 		nav($dat);
-        form($dat, $resno);
+        form($formdat, $resno);
         $st = 0;
-        $dat .= '<div class="passvalid"> <a onClick="location.href=location.href" ><button>' . S_REFRESH . '</button></a>  <a href="index.php"><button class="button-full">' . S_RETURNS . '</button></a></div> <br>';
+        $dat .= '<div class="ui sticky passvalid"><a href="index.php"><button class=" small ui button">' . S_RETURNS . '</button></a> <a onClick="location.href=location.href" ><button class="small ui icon button"><i class="sync icon"></i></button></a>'.$formdat.'</div> <br>';
 
         $p = 0;
         for ($i = $st; $i < $st + PAGE_DEF; $i ++) {
@@ -197,7 +198,7 @@ function updatelog($resno = 0)
                 $fname = substr($fname,0,22);
                 $com = auto_link($com);
                 $com = preg_replace("/&gt;/i", ">", $com);
-                $com = preg_replace("/\>\>([0-9]+)/i", "<a href='index.php?res=$resto#r\\1'>&gt;&gt;\\1</a>", $com);
+                $com = preg_replace("/\>\>([0-9]+)/i", "<a id='tag\\1' href='index.php?res=$resto#r\\1'>&gt;&gt;\\1</a>", $com);
                 $com = preg_replace("/(^|>)(\>[^<]*)/i", "\\1<span class=\"unkfunc\">\\2</span>", $com);
                 if (DISP_ID) {
                     $userid = "ID:$id";
@@ -205,9 +206,8 @@ function updatelog($resno = 0)
                     $userid = "";
                 }
                 // Main creation
-                $dat .= "<table id='r$no' class=\"centermsg\"><tr><td class=\"reply\">";
-                $dat .= "<span class='intro'> ";
-                $dat .= "<span class=\"filetitle\">$name : $sub</span><div class=\"righted\"><a class=\"reflink\" href=\"#\" onClick=\"addref('>>$no');\">Nb:$no</a> &nbsp;</span></div><hr>";
+                $dat .= "<div id='r$no' class=\"centermsg reply \">";
+                $dat .= "<div class=\"filetitle\">$name : $sub</div><div class=\"righted\"> $now <a class=\"reflink\"  onClick=\"addref('>>$no');openform('.bouton-form');\">Nb:$no</a> &nbsp; </span></div><hr>";
 
                 $src = IMG_DIR . $tim . $ext;
                 if ($ext && ($ext == ".webm" || $ext == ".mp4")) {
@@ -225,14 +225,12 @@ function updatelog($resno = 0)
                         $imgsrc = "<a href=\"" . $src . "\" target=\"_blank\"><img src=\"" . $src . "\" alt=\"" . $size . " B\" /></a>;";
                     }
                     if (@is_file(THUMB_DIR . $tim . 's.jpg')) {
-                        $dat .= " <span class=\"thumbnailmsg\">" . S_THUMB . "</span>$imgsrc<br>";
+                        $dat .= " <div class=\"thumbnailmsg\">" . S_THUMB . "</div>$imgsrc<br>";
                     } else {
                         $dat .= "$imgsrc<br>";
                     }
                 }
-                $dat .= "<blockquote> $com</blockquote>";
-                $dat .= "";
-                $dat .= "<hr><div class=\"righted\"><span class=\"commentpostername\">$now</span></div></td></tr></table>";
+                $dat .= "<div class='com'>$com</div></div>";
             }
             clearstatcache(); // clear stat cache of a file
             mysqli_free_result($resline);
@@ -244,8 +242,6 @@ function updatelog($resno = 0)
         // in res display mode
 
         $dat .= "<table></table>";
-        $dat .= "</div></div>";
-        
         foot($dat);
         if ($resno) {
             echo $dat;
@@ -270,20 +266,27 @@ function head(&$dat)
     $dat .= '<!doctype html>
 <html lang="' . LANGUAGE . '"> 
 
-<link rel="stylesheet" type="text/css" href="https://4feuilles.org/css/4feuilles_claire.css">
-<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap" rel="stylesheet">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.slim.min.js"></script>
-<script src="/js/4feuilles.js"></script><head>
-<script src="/js/risibank.js"></script>
-<script src="/js/webring.js"></script>
+<link rel="stylesheet" type="text/css" href="https://' . WEBSITEURL . '/css/4feuilles.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://' . WEBSITEURL . '/js/jquery.ui.touch-punch.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.js"></script>
+<script src="https://' . WEBSITEURL . '/js/4feuilles.js"></script><head>
+<script src="https://' . WEBSITEURL . '/js/risibank.js"></script>
+<script src="https://' . WEBSITEURL . 'js/webring.js"></script>
 <script src="https://www.hCaptcha.com/1/api.js" async defer></script>
 
 <meta http-equiv="content-type"  content="text/html;charset=utf-8" />
-
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
 
 ';
 
@@ -293,14 +296,13 @@ function head(&$dat)
 
 function nav(&$dat)
 {
-	$titlepart = '';
+    $titlepart = '';
     if (SHOWTITLEIMG == 1) {
-        $titlepart .= '<img src="' . TITLEIMG . '" alt="' . TITLE . '" />';
+        $titlepart .= '<img src="' . TITLEIMG . '" alt="' . TITLE . '" /><br>';
         if (SHOWTITLETXT == 1) {
             $titlepart .= '<br />';
         }
     } elseif (SHOWTITLEIMG == 2) {
-        $titlepart .= '<img src="' . BANNERS[mt_rand(0, count(BANNERS) - 1)] . '" onclick="this.src=this.src;" alt="' . TITLE . '" />';
         if (SHOWTITLETXT == 1) {
             $titlepart .= '<br />';
         }
@@ -308,45 +310,61 @@ function nav(&$dat)
     if (SHOWTITLETXT == 1) {
         $titlepart .= TITLE;
     }
-	
-	
-	$pc = boardslist(3);
+
+    $pc = boardslist(3);
     
     $mobile = boardslist(2);
 	
 	$dat .= '<body>
 	
-    <div class="navbar">
+    <div class="navbar" id="navpc">
     <div class="menu-normal">
 	
     <div class="boardslist">
-    <a href="https://4feuilles.org" target="_top"><button>Accueil</button></a>
+    <div class="ui secondary menu stackable inverted">
+    <a class="item active" href="https://' . WEBSITEURL . '" target="_top">Accueil</a>
 	'. $pc .'
+	<a class="item"><div class="webring"></div></a>
+	<div class="right menu">
+	    <a class="item">
+                <i class="moon outline icon"></i>
+                <div class="ui theme toggle checkbox inverted" id="theme-switcher">
+                    <input type="checkbox">
+                </div>
+                <i class="moon icon"></i>
+        </a>
 	</div>
-    <div class="webring"></div>
-    
-    <div class="style">
-	Thème: 
-	<a href="#" onclick="changeCSS(\'/css/4feuilles_claire.css\', 0);document.cookie=\'theme=/css/4feuilles_claire.css\';"><button>Clair</button></a> 
-	
-    <a href="#" onclick="changeCSS(\'/css/4feuilles_sombre.css\', 0);document.cookie=\'theme=/css/4feuilles_sombre.css\';"><button>Sombre</button></a>
+
 	</div>
 
     </div>
 	</div>
-	
-    <div class="menu-mobile"onclick="mobile(this)">
-    <div class="navbar">
-	<a id="bouton-mobile"><button class="button-full">Menu</button></a>
-	<ul id="mobile-cacher">
-    <li><a href="https://4feuilles.org" target="_top"><button class="button-mobile">Accueil</button></a></li>
-    ' . $mobile . '
-    <div class="webring"></div>
-	</ul>
+
+    </div>
+    
+    <div class="menu-mobile" id="navmobile">
+    <div class="navbar" >
+	<a id="bouton-mobile"><button class="ui small  button primary" onclick="mobile(\'menu-mobile\')">Menu</button></a>
+	<div id="mobile-cacher">
+      <div class="ui secondary center stackable menu inverted">
+    <a class="item active" href="https://4feuilles.org" target="_top">Accueil</a>
+	'. $pc .'
+	<a class="item"><div class="webring"></div></a>
+	<div class="right menu">
+	    <a class="item">
+                <i class="moon outline icon"></i>
+                <div class="ui theme toggle checkbox inverted" id="theme-switcher">
+                    <input type="checkbox">
+                </div>
+                <i class="moon icon"></i>
+        </a>
+	</div>
+	</div>
+	</div>
 	</div>
     </div>
-	
-	<div class="logo"><br>' . $titlepart . ' <br></div>';
+    <div class="logo"><br>'.$titlepart.' <br></div><br>
+    ';
 
 
 }
@@ -360,86 +378,95 @@ function form(&$dat, $resno, $admin = "", $manapost = false)
     else
         $msg = '';
 
-    $dat .= $msg . '<div class="centered"><div class="postarea" > ';
+    //$dat .= $msg . '<div class="centered"><div class="postarea" >';
    
     if (! $admin) {
         if (! $resno) {
-            $dat .= '<a id="bouton-form" onclick="hideform(this)"><button class="button-full">' . S_NEWTHREAD . '</button></a>';
+            $dat .= '<a id="bouton-form" onclick="hideform(this)"><button class="ui small labeled icon button primary"><i class="comments outline icon"></i>' . S_NEWTHREAD . '</button></a>';
         } else {
-            $dat .= '<a id="bouton-form" onclick="hideform(this)"><button class="button-full">' . S_POSTING . '</button></a>';
+            $dat .= '<a id="bouton-form" onclick="hideform(this)"><button class="ui small labeled icon button primary"><i class="comment outline icon"></i>' . S_POSTING . '</button></a>';
         }
-    } 
+    }
+	if ($admin && $_SESSION['cancap']) {
+		$dat .= '<a id="bouton-form" onclick="hideform(this)"><button class="ui small labeled icon button primary"><i class="comment outline icon"></i>' . S_POSTING . '</button></a>';
+	}
     
     $dat .= $msg . '<div id="postarea-hidden">
-		<form id="postform" action="index.php" method="post" enctype="multipart/form-data" style="display: inline-block;">
+		<div id="draggable" class="ui-widget-content" style="position: fixed; left:calc(50vw - 168px);"><div class="titlebar">Nouveau message<a id="bouton-form" class="righted" onclick="hideform(\'.bouton-form\')"><button class="mini ui compact icon primary button"><i class="times icon"></i></button></a></div>
+		<form id="form-board" class="ui form" action="index.php" method="post" enctype="multipart/form-data" style="display: inline-block;">
 		<input type="hidden" name="mode" value="regist" />
 		<input type="hidden" name="MAX_FILE_SIZE" value="' . $maxbyte . '" />';
     if ($no) {
         $dat .= '<input type="hidden" name="resto" value="' . $no . '" />';
     }
-    $dat .= '<table>';
 
-    if (! FORCED_ANON || $admin)
-        // $dat.='<tr><td class="postblock">'.S_NAME.'</td><td><input type="text" name="name" value="" placeholder="Anonymous';
-        if ($manapost)
-            $dat .= $_SESSION['name'];
-    // $dat .= '" size="35" /></td></tr>';
     if ($admin && $_SESSION['cancap']) {
         $dat .= '<tr><td class="postblock">' . S_CAPCODE . '</td><td>(' . $_SESSION['capcode'] . ')</td></tr>
-		<tr><td class="postblock">' . S_REPLYTO . '</td><td><input type="text" name="resto" size="35" value="0" /></td></tr>';
+		<tr><td class="postblock">' . S_REPLYTO . '</td><td><input type="text" name="resto" value="0" /></td></tr>';
     }
-    $dat .= '<tr><td class="postblock">' . S_SUBJECT . '</td><td><input type="text" name="sub"  />
-	<input type="submit" value="' . S_SUBMIT . '" /></td></tr>
-	<tr><td class="postblock">' . S_COMMENT . '</td><td><textarea id="com" name="com" ></textarea> 
-<br>
-  <a href="javascript:void(0)" onclick="RisiBank.activate(\'com\')">
-    <img class="risibank" style="width: 120px" src="https://risibank.fr/src/picts/banner-light.png">
-  </a> 
-</td></tr>';
-    $dat .= '<tr id="filerow"><td class="postblock">' . S_UPLOADFILE . '</td>
-<td> <div id="file-selector"><label for="file" class="label-file"><input type="file" id="file" class="input-file" name="upfile" accept=".jpg, .jpeg, .png, .gif, .mp4, .webm" /><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path fill="none" d="M0 0h24v24H0z"/><path d="M4 19h16v-7h2v8a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-8h2v7zM14 9v6h-4V9H5l7-7 7 7h-5z" fill="rgba(255,255,255,1)"/></svg> <span class="file-name"> Aucune image sélectionnée</span>   </label></div>  ';
+    $dat .= '<input type="text" name="sub" placeholder="Titre"/>      
+	        <div class="ui icon menu bottommargin">
+                <a class="item" onclick="styletext(\'!b!\')">
+                     <i class="bold icon"></i>
+                </a>
+                <a class="item" onclick="styletext(\'!i!\')">
+                     <i class="italic icon"></i>
+                </a>
+                <a class="item" onclick="styletext(\'!u!\')">
+                     <i class="underline icon"></i>
+                </a>
+                <a class="item" onclick="styletext(\'!s!\')">
+                     <i class="eye slash icon"></i>
+                </a>
+                <a class="item" href="javascript:void(0)" onclick="RisiBank.activate(\'com\')">
+                    <img class="risibank" style="width: 55px; " src="https://risibank.fr/src/picts/banner-light.png">
+                </a>
+                 <a class="item">
+                    <i class="smile icon"></i>
+                </a>
+            </div>
+	        <textarea id="com" name="com" placeholder="Message"></textarea> <br>
+<div class="ui labeled button topmargin" tabindex="0">
+  <div class="ui icon button"><i class="photo video icon"></i></div>
+    <a class="ui basic label"><div id="file-selector"><label for="file" class="label-file"><input type="file" id="file" class="input-file" name="upfile" accept=".jpg, .jpeg, .png, .gif, .mp4, .webm" /> <span class="file-name"> Aucune image sélectionnée</span></label></div> </a>
+</div>
+<button class="ui small button primary" type="submit" id="submitbtn" >' . S_SUBMIT . '</button>
+ ';
     
-    $dat .='<tr><td class="postblock">' . S_VERIF . '</td><td><div class="h-captcha" data-sitekey="' . HCAPTSITEKEY . '"></div></td></tr>';
-    
-   
-    // $dat .= '</td></tr><tr><td class="postblock">' . S_DELPASS . '</td><td><input type="password" name="pwd" maxlength="8" value="" /> ' . S_DELEXPL . '</td></tr>
-    // <tr><td colspan="2">
-     $dat .= ' </td></tr><tr><tr><td colspan="2"><div class="rules lefted">';
-    if (SWF_ENABLED && WEBM_ENABLED)
-        $dat .= S_RULES_BOTH;
-    elseif (SWF_ENABLED)
-        $dat .= S_RULES_SWF;
-    elseif (WEBM_ENABLED)
-        $dat .= S_RULES_WEBM;
-    else
-        $dat .= S_RULES;
-    $dat .= '</div></td></tr></table></form></div></div></div><br>   ';
-}
+    $dat .='<tr><td><div class="h-captcha" data-sitekey="'+ HCAPTCHASECRET +'" data-callback="onSubmit" data-size="invisible" ></div></td></tr>';
 
-function fakefoot()
-{
-    $dat = '';
-    foot($dat);
-    return $dat;
+     $dat .= ' </td></tr><tr><tr><td colspan="2"><div class="rules lefted">';
+
+     //$dat .= S_RULES_WEBM;
+
+    $dat .= '</form></div></div></div>';
 }
 
 /* Footer */
 function foot(&$dat)
 {
-    $dat .= "<div class=\"footer\"> <a href ='https://github.com/MrBn100ful/4feuilles' target ='_blank'> 4Feuilles.org</a> " . S_NAMEVERSION . "<br>" . S_FOOT . "</div></body></html>\n";
+    $dat .= "</div></div><div class=\"footer\"> <a href ='https://github.com/MrBn100ful/4feuilles' target ='_blank'> 4Feuilles.org</a> " . S_NAMEVERSION . "<br>" . S_FOOT . "</div></body></html>\n";
 }
 
 function error($mes, $dest = '')
 { /* Basically a fancy die() */
+	$dat = '';
     global $upfile_name, $path;
     if (is_file($dest))
         unlink($dest);
     head($dat);
-    echo $dat;
-    echo "<br /><br /><br /><br />
-		<p id='errormsg'>$mes<br /><br /><a href=" . PHP_SELF2 . ">" . S_RETURN . "</a></b></p>
-		<br /><br />";
+	$dat .= "<div class=\"content\">";
+	nav($dat);
+    $dat .= "<div class=\"centered\"> <br /><br />
+		<div class=\"ui negative message\" style=\"max-width: 500px;margin: auto;\">
+  			<div class=\"header\">
+    			$mes
+  			</div>
+		</div>
+		<br /><a href=\"index.php\"><button class=\"small ui icon button\">" . S_RETURN . "</button></a></b>";
+	$dat .= "</div></div></div>";
     foot($dat);
+	echo $dat;
     die("</body></html>\n");
 }
 
@@ -448,7 +475,30 @@ function auto_link($proto)
     $proto = preg_replace("~https?://(?![^' <>]*(?:jpg|png|gif|jpeg))[^' <>]+~", "<a href=\"$0\" target=\"_blank\">$0</a>", $proto);
     
     $proto = preg_replace("/(http:\/\/|https:\/\/)[^\s]+(.png|.jpg|.gif|jpeg)/", " <a href=\"$0\"><img class=\"sticker\" src=\"$0\" ></a>", $proto);
-    
+
+    $proto = preg_replace('/!b!(.*)!b!/', '<b>$1</b>', $proto);
+
+    $proto = preg_replace('/!i!(.*)!i!/', '<i>$1</i>', $proto);
+
+    $proto = preg_replace('/!u!(.*)!u!/', '<u>$1</u>', $proto);
+
+    $proto = preg_replace('/!s!(.*)!s!/', '<div class="spoiler">$1</div>', $proto);
+
+    $urlimg = "https://4feuilles.org/img/";
+
+    $txt = array(":)", ":hap:", ":rire:", ":ok:", ":(", ":malade:", ":bave:");
+
+    $img   = array("<img class=\"smiley\" src=\"{$urlimg}smile.png\" >", "<img class=\"smiley\" src=\"{$urlimg}hap.png\" >", "<img class=\"smiley\" src=\"{$urlimg}rire.png\" >", "<img class=\"smiley\" src=\"{$urlimg}ok.png\" >", "<img class=\"smiley\" src=\"{$urlimg}sceptique.png\" >", "<img class=\"smiley\" src=\"{$urlimg}malade.png\" >", "<img class=\"smiley\" src=\"{$urlimg}bave.png\" >");
+
+    $proto = str_replace($txt, $img, $proto);
+
+    return $proto;
+}
+function removenoelshack($proto)
+{
+    $proto = preg_replace("~https?://image.noelshack.com(?![^' <>]*(?:jpg|png|gif|jpeg))[^' <>]+~", "", $proto);
+    $proto = preg_replace("~http?://image.noelshack.com(?![^' <>]*(?:jpg|png|gif|jpeg))[^' <>]+~", "", $proto);
+
     return $proto;
 }
 
@@ -460,20 +510,6 @@ function proxy_connect($port)
     } else {
         return true;
     }
-}
-
-// check version of gd
-function get_gd_ver()
-{
-    if (function_exists("gd_info")) {
-        $gdver = gd_info();
-        $phpinfo = $gdver["GD Version"];
-    }
-    $end = strpos($phpinfo, ".");
-    $phpinfo = substr($phpinfo, 0, $end);
-    $length = strlen($phpinfo) - 1;
-    $phpinfo = substr($phpinfo, $length);
-    return $phpinfo;
 }
 
 /* text plastic surgery */
@@ -555,6 +591,12 @@ switch ($mode) {
         break;
     case 'usrdel':
         usrdel($no, $pwd);
+	case 'preview':
+        preview($nbpost);
+		break;
+    case 'forum':
+        forum();
+        break;
     default:
         if (isset($res)) {
             updatelog($res);

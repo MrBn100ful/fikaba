@@ -25,13 +25,13 @@ function boardslist($option){
     } elseif ($option == 3){
         
         foreach (array_combine($short, $long) as $short => $long) {
-            $list[] = '<a href="'.$url.'' . $short . '" target="_top"><button>'.$short.'</button></a> ';
+            $list[] = '<a class="item" href="'.$url.'' . $short . '" target="_top">'.$short.'</a> ';
         }
         
     } elseif ($option == 4){
         
         foreach (array_combine($short, $long) as $short => $long) {
-            $list[] = '<a href="'.$url.'' . $short . 'imgboard.php?mode=admin" target="_top">['.$short.']</a>';
+            $list[] = '<a href="'.$url.'' . $short . 'index.php?mode=admin" target="_top">['.$short.']</a>';
         }
         
     }

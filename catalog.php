@@ -5,11 +5,12 @@ function catalog()
     $dat = '';
     head($dat);
 
-	$dat .= "<div class=\"content\">";
+	$dat .= "<div class=\"ui segment content\">";
 	nav($dat);
-    form($dat, 0);
+    form($formdat, 0);
 
-    $dat .= "<div class=\"passvalid\"> <a onClick=\"location.href=location.href\" ><button>" . S_REFRESH . "</button></a></div><br />";
+
+    $dat .= "<div class=\"ui sticky passvalid\"> <a onClick=\"location.href=location.href\" ><button class=\"small ui icon button\"><i class=\"sync icon\"></i></button></a>".$formdat."</div><br />";
     $dat .= "<div class='cattable'>";
     $i = 0;
     $result = mysqli_call("select * from " . POSTTABLE . " order by root desc");
@@ -17,10 +18,6 @@ function catalog()
     while ($row = mysqli_fetch_row($result)) {
         list ($no, $now, $name, $email, $sub, $com, $host, $pwd, $ext, $w, $h, $tim, $time, $md5, $fname, $fsize, $root, $resto, $ip) = $row;
         if ((int) $resto == 0) {
-			if (strlen($sub) > 29) {
-                $sub = substr($sub, 0, 28) . "";
-            }
-			
 			
 		    $callreply = mysqli_call("SELECT COUNT(1) FROM " . POSTTABLE . " WHERE resto = " . $no . "");
 
@@ -36,6 +33,7 @@ function catalog()
 			
 			mysqli_free_result($callreply);
 			mysqli_free_result($callreply2);
+
 			
             $dat .= "<a class='cata' href='index.php?res=$no'><div class='catthread'>";
 			$dat .= "<span class='catresponse'>".$reply."r  |  ".$img."i</span><hr><div class=\"catconte\">";
@@ -55,22 +53,28 @@ function catalog()
                 }
                 $dat .= "$imgsrc";
             }
+			$com = preg_replace("/&gt;/i", ">", $com);
+			
+			$sub = preg_replace("/&gt;/i", ">", $sub);
+			
+			if (strlen($sub) > 29) {
+                $sub = mb_substr($sub, 0, 29) . "";
+            }
+			
             if (strlen($com) > 61) {
-                $com = substr($com, 0, 60) . "";
+                $com = mb_substr($com, 0, 59) . "";
             }
 
-
-
-            $dat .= "</div><hr><span class='cattitle filetitle'>$sub</span><br><span class='catcont'>$com</span></div></a>";
-
-
+            $sub = removenoelshack($sub);
+            $com = removenoelshack($com);
+			
+			$com = strip_tags($com, '<br>');
+            $dat .= "</div><hr><span class='cattitle titletxt'>$sub</span><br><span class='catcont'>$com</span></div></a>";
 
             $i ++;
         }
     }
     mysqli_free_result($result);
-
-    $dat .= "</div></div>";
     foot($dat);
     echo ($dat);
 }

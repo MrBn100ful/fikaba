@@ -8,12 +8,13 @@ const SHOWTITLETXT = 1;				//Show TITLE at top (1: yes, 0: no)
 const SHOWTITLEIMG = 0;				//Show image at top (0: no, 1: single, 2: rotating)
 const BANNERS = array('title1.png', 'title2.png');	// Banners for SHOWTITLEIMG=2
 const TITLEIMG = 'title.png';			//Title image for SHOWTITLEIMG=1
-const LANGUAGE = 'en';				//Language. Fikaba provides en and ja by default
+const LANGUAGE = 'FR';				//Language. Fikaba provides en and ja by default
 const FOOTTEXT = '';				//Extra footer text, for disclaimers and such. Can be left empty
 const TIMEZONE = 1;					// Time Zone in GTM Ex: 1 = GTM+1
 const DATEFORMAT = 'd/m/y';			// Set date format Ex: d/m/y = Day Month Year 
 const HCAPTCHASECRET = '';			// your hcaptcha secret
 const HCAPTSITEKEY = ''; 			// your hcaptcha site key
+const WEBSITEURL = '';				// The URL of the imageboard
 
 // Database settings
 const POSTTABLE = 'CHANGEME';			//Post table (NOT DATABASE)
@@ -58,15 +59,6 @@ const DISP_ID = false;				//Display user IDs
 const FORCED_ANON = false;			//Force anonymous posting (except for managers)
 const BADSTRING = array();			//Posts containing any of these strings will be discarded (can be a nuisance, use with care)
 const BADFILE = array();			//Files to be discarded (md5 hashes)
-
-// CSS
-const CSSDEFAULT = 'Futaba';			// The name of the stylesheet to be used by default
-const STYLES = array(				// Array containing NAME => FILE of stylesheets
-	"Futaba"	=>	'css/futaba.css',
-	"Burichan"	=>	'css/burichan.css',
-	"Yotsuba"	=>	'css/yotsuba.css',
-	"heavy_ice"	=>	'css/heavy_ice.css'
-);
 
 const FILTERS = array(				// Filters, in the format of IN => OUT
 	"darn"		=>	'd*rn'

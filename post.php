@@ -3,12 +3,13 @@
 function regist($ip, $name, $capcode, $email, $sub, $com, $oekaki, $url, $pwd, $upfile, $upfile_name, $resto, $captcha)
 {
     
+    $secret = HCAPTSITEKEY;
    
     if (isset($captcha) && ! empty($captcha)) {
         
          
          $post = [
-             'secret' => HCAPTCHASECRET,
+             'secret' => $secret,
              'response' => $captcha,
          ];
          
@@ -383,6 +384,7 @@ function regist($ip, $name, $capcode, $email, $sub, $com, $oekaki, $url, $pwd, $
                 catalog();
             } else {
                 updatelog($resto);
+                //header('Location: https://' + $_SERVER[HTTP_HOST] + $_SERVER[REQUEST_URI]+'?res='.$resto.'&down=true');
             }
         }
     } else {
@@ -450,11 +452,8 @@ function thumb($path, $tim, $ext)
         $out_h = $size[1];
     }
     // the thumbnail is created
-    if (function_exists("ImageCreateTrueColor") && get_gd_ver() == "2") {
-        $im_out = ImageCreateTrueColor($out_w, $out_h);
-    } else {
-        $im_out = ImageCreate($out_w, $out_h);
-    }
+    $im_out = ImageCreateTrueColor($out_w, $out_h);
+
     // change background color
     $backing = imagecolorallocate($im_out, ...THUMBBACK);
     imagefill($im_out, 0, 0, $backing);
