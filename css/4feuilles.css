@@ -1,5 +1,4 @@
 @import "/css/risibank.css";
-@import "/css/webring.css";
 
 :root {
  --background: linear-gradient(to top, #a1c4fd 0%, #c4ddff 100%);
@@ -24,14 +23,15 @@
  --color19: #fff;
  --color20: #0066b7;
  --color21: #6898f2;
- --color22: rgba(255, 255, 255, .40);
+ --color22: #0066b7;
+ --color23: rgb(15, 91, 151);
 }
 
 .dark {
- --background: linear-gradient(to top, #2b2b2b 0%, #2a2a2a 100%);
+ --background: #121212;
  --color: #fff;
  --color2: #3c3c3c;
- --color3: #3c3c3c;
+ --color3: #202020;
  --color4: #616161;
  --color5: #0055a4;
  --color6: #2f2f2f;
@@ -46,11 +46,12 @@
  --color15: #cacaca;
  --color16: #262626;
  --color17: #fbfbfb;
- --color18: #1e1d1d;
+ --color18: #202020;
  --color19: #fff;
  --color20: #007ff5;
  --color21: #3687d2;
- --color22: rgba(0, 0, 0, .40);
+ --color22: #202020;
+ --color23: rgb(15, 91, 151);
 }
 
 
@@ -60,6 +61,7 @@ html {
 }
 body {
  background-image:var(--background)!important;
+ background-color:var(--background)!important;
  background-attachment: fixed!important;
  color:var(--color)!important;
  margin:auto
@@ -256,8 +258,9 @@ td {
  text-align:center;
  background:inherit;
  font-size:24pt;
- color:var(--color7);
+ color:var(--color19);
  width:100%;
+ text-shadow: 0px 0px 9px var(--color23);
 }
 .logo img {
  margin:0 auto;
@@ -539,6 +542,26 @@ td {
  }
  .catthread {
   width: 180px;
+ }
+ .cattable{
+  margin: auto;
+ }
+ .logo img {
+	width:60%;
+ 
+}
+img{
+	max-width: 88vw;
+}
+
+}
+@media screen and (max-width: 50em) {
+ .reply {
+  min-width: 95vw;
+  max-width: 95vw;
+ }
+ .catthread {
+  width: 160px;
  }
  .cattable{
   margin: auto;

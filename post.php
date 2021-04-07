@@ -31,6 +31,7 @@ function regist($ip, $name, $capcode, $email, $sub, $com, $oekaki, $url, $pwd, $
 
             if (isbanned($ip))
                 error(S_BANRENZOKU);
+			
             // time
             $time = time();
             $tim = $time . substr(microtime(), 2, 3);
@@ -266,9 +267,7 @@ function regist($ip, $name, $capcode, $email, $sub, $com, $oekaki, $url, $pwd, $
             $name = preg_replace("/[\r\n]/", "", $name);
             $names = $name;
             $name = trim($name); // blankspace removal
-            if (get_magic_quotes_gpc()) { // magic quotes is deleted (?)
-                $name = stripslashes($name);
-            }
+            $name = stripslashes($name);
             $name = htmlspecialchars($name); // remove html special chars
             $name = str_replace("&amp;", "&", $name); // remove ampersands
             $name = str_replace(",", "&#44;", $name); // remove commas
@@ -331,7 +330,7 @@ function regist($ip, $name, $capcode, $email, $sub, $com, $oekaki, $url, $pwd, $
             }
 
             $restoqu = (int) $resto;
-            $rootqu = "now()";
+            $rootqu = "CURRENT_TIMESTAMP";
             if ($resto) { // res,root processing
                 if (! $resline = mysqli_call("select * from " . POSTTABLE . " where resto=" . $resto)) {
                     echo S_SQLFAIL;
@@ -339,16 +338,14 @@ function regist($ip, $name, $capcode, $email, $sub, $com, $oekaki, $url, $pwd, $
                 $countres = mysqli_num_rows($resline);
                 mysqli_free_result($resline);
                 if (! stristr($email, 'sage') && $countres < BUMPLIMIT) {
-                    $query = "update " . POSTTABLE . " set root=now() where no=$resto"; // age
+                    $query = "update " . POSTTABLE . " set root=CURRENT_TIMESTAMP where no=$resto"; // age
                     if (! $result = mysqli_call($query)) {
                         echo S_SQLFAIL;
                     }
                 }
             }
 
-            $query = "insert into " . POSTTABLE . " (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fname,fsize,root,resto,ip,id) values (" . "'" . $now . "'," . "'" . mysqli_escape_string($con, $name) . "'," . "'" . mysqli_escape_string($con, $email) . "'," . "'" . mysqli_escape_string($con, $sub) . "'," . "'" . mysqli_escape_string($con, $com) . "'," . "'" . mysqli_escape_string($con, $host) . "'," . "'" . mysqli_escape_string($con, $pass) . "'," . "'" . $ext . "'," . (int) $W . "," . (int) $H . "," . "'" . $tim . "'," . (int) $time . "," . "'" . $md5 . "'," . "'" . $upfile_name . "'," . (int) $fsize . "," . $rootqu . "," . (int) $resto . ",
-        \"" . $_SERVER['REMOTE_ADDR'] . "\",
-        '$posterid')";
+            $query = "insert into " . POSTTABLE . " (now,name,email,sub,com,host,pwd,ext,w,h,tim,time,md5,fname,fsize,root,resto,ip,id) values (" . "'" . $now . "'," . "'" . mysqli_escape_string($con, $name) . "'," . "'" . mysqli_escape_string($con, $email) . "'," . "'" . mysqli_escape_string($con, $sub) . "'," . "'" . mysqli_escape_string($con, $com) . "'," . "'" . mysqli_escape_string($con, $host) . "'," . "'" . mysqli_escape_string($con, $pass) . "'," . "'" . $ext . "'," . (int) $W . "," . (int) $H . "," . "'" . $tim . "'," . (int) $time . "," . "'" . $md5 . "'," . "'" . $upfile_name . "'," . (int) $fsize . "," . $rootqu . "," . (int) $resto . ",\"" . $_SERVER['REMOTE_ADDR'] . "\",'$posterid')";
             if (! $result = mysqli_call($query)) {
                 echo S_SQLFAIL;
             } // post registration

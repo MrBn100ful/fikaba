@@ -5,9 +5,9 @@ function boardslist($option){
     
     $url = 'https://planches.4feuilles.org';
     
-    $short = array('/gen/','/ani/','/tec/','/jeu/','/ale/','/art/','/cul/');
+    $short = array('/gen/','/ani/','/tec/','/jeu/');
     
-    $long = array('Générale','Anime','Technologie','Jeux vidéo','Aléatoire','Art','Porn');
+    $long = array('Générale','Anime','Technologie','Jeux vidéo');
     
 
     if ($option == 1) {

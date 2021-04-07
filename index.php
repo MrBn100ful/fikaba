@@ -1,12 +1,12 @@
 <?php
 
-// 4Feuilles build:200825
+// 4Feuilles build:210406
 //
 // For setup instructions and latest version, please visit:
 // https://github.com/MrBn100ful/4feuilles
 //
 // Based on GazouBBS, Futaba, Futallaby, Fikaba
-const S_NAMEVERSION = 'v3.2';
+const S_NAMEVERSION = 'v3.2.4';
 
 include 'config.php';
 include 'boardslist.php';
@@ -274,7 +274,6 @@ function head(&$dat)
 <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.6/dist/semantic.min.js"></script>
 <script src="https://' . WEBSITEURL . '/js/4feuilles.js"></script><head>
 <script src="https://' . WEBSITEURL . '/js/risibank.js"></script>
-<script src="https://' . WEBSITEURL . 'js/webring.js"></script>
 <script src="https://www.hCaptcha.com/1/api.js" async defer></script>
 
 <meta http-equiv="content-type"  content="text/html;charset=utf-8" />
@@ -303,6 +302,7 @@ function nav(&$dat)
             $titlepart .= '<br />';
         }
     } elseif (SHOWTITLEIMG == 2) {
+        $titlepart .= '';
         if (SHOWTITLETXT == 1) {
             $titlepart .= '<br />';
         }
@@ -324,7 +324,6 @@ function nav(&$dat)
     <div class="ui secondary menu stackable inverted">
     <a class="item active" href="https://' . WEBSITEURL . '" target="_top">Accueil</a>
 	'. $pc .'
-	<a class="item"><div class="webring"></div></a>
 	<div class="right menu">
 	    <a class="item">
                 <i class="moon outline icon"></i>
@@ -347,9 +346,8 @@ function nav(&$dat)
 	<a id="bouton-mobile"><button class="ui small  button primary" onclick="mobile(\'menu-mobile\')">Menu</button></a>
 	<div id="mobile-cacher">
       <div class="ui secondary center stackable menu inverted">
-    <a class="item active" href="https://4feuilles.org" target="_top">Accueil</a>
+    <a class="item active" href="https://' . WEBSITEURL . '" target="_top">Accueil</a>
 	'. $pc .'
-	<a class="item"><div class="webring"></div></a>
 	<div class="right menu">
 	    <a class="item">
                 <i class="moon outline icon"></i>
@@ -363,7 +361,7 @@ function nav(&$dat)
 	</div>
 	</div>
     </div>
-    <div class="logo"><br>'.$titlepart.' <br></div><br>
+    <div class="logo">'.$titlepart.' <br></div><br>
     ';
 
 
@@ -476,13 +474,13 @@ function auto_link($proto)
     
     $proto = preg_replace("/(http:\/\/|https:\/\/)[^\s]+(.png|.jpg|.gif|jpeg)/", " <a href=\"$0\"><img class=\"sticker\" src=\"$0\" ></a>", $proto);
 
-    $proto = preg_replace('/!b!(.*)!b!/', '<b>$1</b>', $proto);
+    $proto = preg_replace('/!b!(.*?)!b!/', '<b>$1</b>', $proto);
 
-    $proto = preg_replace('/!i!(.*)!i!/', '<i>$1</i>', $proto);
+    $proto = preg_replace('/!i!(.*?)!i!/', '<i>$1</i>', $proto);
 
-    $proto = preg_replace('/!u!(.*)!u!/', '<u>$1</u>', $proto);
+    $proto = preg_replace('/!u!(.*?)!u!/', '<u>$1</u>', $proto);
 
-    $proto = preg_replace('/!s!(.*)!s!/', '<div class="spoiler">$1</div>', $proto);
+    $proto = preg_replace('/!s!(.*?)!s!/', '<div class="spoiler">$1</div>', $proto);
 
     $urlimg = "https://4feuilles.org/img/";
 
@@ -516,9 +514,7 @@ function proxy_connect($port)
 function CleanStr($str)
 {
     $str = trim($str); // blankspace removal
-    if (get_magic_quotes_gpc()) { // magic quotes is deleted (?)
         $str = stripslashes($str);
-    }
     if (! (isset($_SESSION['cancap']) && ((int) $_SESSION['cancap']) != 0)) {
         $str = htmlspecialchars($str); // remove html special chars
         $str = str_replace("&amp;", "&", $str); // remove ampersands
@@ -594,9 +590,6 @@ switch ($mode) {
 	case 'preview':
         preview($nbpost);
 		break;
-    case 'forum':
-        forum();
-        break;
     default:
         if (isset($res)) {
             updatelog($res);
